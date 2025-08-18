@@ -10,14 +10,18 @@
         
 ## Incoming Features :
 - Collision detection and collider nodes
+- Camera Node
 - Tilemap node
 - 2D parallaxe
 - Auto Tilemap using wave function collapse
 - Rain Effect
 - XML save files for scenes
 - Custom Scene Editor
+- Particle Systems
 ## Ideas :
 - dynamic weather system with wind and rain intensity + lightning strikes that flip the whole screens's colors
 - dynamic lightning with inverted colors + vignette
 - Water puddles with vertex displacement when the player passes through them
 - animated trees and foliage
+- Line boil effect
+- Trail Renderers
