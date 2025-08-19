@@ -3,11 +3,6 @@
 //
 #include "Game.h"
 
-#include "../Engine/Nodes/SceneNodes/SceneNode.h"
-#include "../Engine/Nodes/SceneNodes/Renderers/SpriteRendererNode.h"
-#include "../Engine/Rendering/RendererManager.h"
-#include "../Engine/Rendering/SpriteManager.h"
-
 Game::Game()=default;
 
 Game::~Game()
@@ -31,7 +26,7 @@ void Game::LoadScene()
     for (int i =0;i<10;i++)
     {
         SpriteRendererNode* sr = new SpriteRendererNode("SpriteRenderer_decor_"+std::to_string(i),"test");
-        sr->setPosition({static_cast<float>(i),static_cast<float>(i)});
+        //sr->setPosition({static_cast<float>(i),static_cast<float>(i)});
         sceneRoot->AddChild(sr);
     }
 
@@ -105,7 +100,7 @@ void Game::DrawGame()
 {
     Window.clear(sf::Color::Black);
 
-    RendererManager::Instance->DrawAllRenderersInOrder(Window);
+    //RendererManager::Instance->DrawAllRenderersInOrder(Window,);
 
     Window.display();
 }

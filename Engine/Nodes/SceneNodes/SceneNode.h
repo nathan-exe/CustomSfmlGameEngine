@@ -4,15 +4,29 @@
 
 #ifndef TESTSFML_SCENENODE_H
 #define TESTSFML_SCENENODE_H
-#include <SFML/Graphics/Transformable.hpp>
+
+
+#include <SFML/Graphics/Transform.hpp>
+#include <SFML/System/Vector2.hpp>
+
 #include "../Node.h"
 
-class SceneNode : public Node, public sf::Transformable
-{
-    public:
-    SceneNode(const string& name) ;
+using sf::Vector2,sf::Angle;
 
-public :
+class SceneNode : public Node
+{
+public:
+    SceneNode(const string& name);
+
+    sf::Transform GetLocalToWorldTransform() const;
+    sf::Transform GetWorldToLocalTransform() const;
+    void SetWorldTransform(const sf::Transform& newWorldTransform);
+
+    sf::Transform GetScreenTransform(const sf::Transform& viewMatrix) const;
+
+private :
+    sf::Transform localTransform;
+
 
 };
 

@@ -20,6 +20,12 @@ add_executable(testSFML main.cpp
         Engine/Nodes/SceneNodes/Renderers/SpriteRendererNode.h
         Engine/Rendering/RendererManager.cpp
         Engine/Rendering/RendererManager.h
+        Engine/Rendering/Rendering.h
+        Engine/Nodes/AllNodes.h
+        Engine/Nodes/SceneNodes/CameraNode.cpp
+        Engine/Nodes/SceneNodes/CameraNode.h
+        Engine/Dependencies.h
+
 
 )
 target_link_libraries(testSFML PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)

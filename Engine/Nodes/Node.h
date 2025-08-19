@@ -9,6 +9,8 @@
 #include <iostream>
 #include <string>
 #include <unordered_set>
+#include <functional>
+#include <sstream>
 
 using std::string, std::cout,std::endl;
 

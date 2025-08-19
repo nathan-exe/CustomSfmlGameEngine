@@ -4,12 +4,7 @@
 
 #include "SpriteManager.h"
 
-#include <iostream>
-#include <ranges>
-#include <SFML/System/Exception.hpp>
 
-using namespace std::filesystem;
-using std::cout,std::cerr,std::endl;
 
 const  SpriteManager* SpriteManager ::Instance = nullptr;
 

@@ -4,8 +4,10 @@
 
 #ifndef TESTSFML_RENDERERMANAGER_H
 #define TESTSFML_RENDERERMANAGER_H
-#include <vector>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include "../Nodes/SceneNodes/Renderers/RendererNode.h"
+#include "../Nodes/SceneNodes/CameraNode.h"
+
 
 class RendererManager
 {
@@ -14,7 +16,7 @@ public:
     ~RendererManager();
     static RendererManager* Instance;
 
-    void DrawAllRenderersInOrder(sf::RenderWindow& window) const;
+    void DrawAllRenderersInOrder(sf::RenderWindow& window,CameraNode& camera) const;
     void PrintAllRenderersInOrder() const;
 
     void RegisterRenderer(RendererNode* renderer);

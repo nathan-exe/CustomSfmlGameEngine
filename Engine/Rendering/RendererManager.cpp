@@ -4,6 +4,7 @@
 
 #include "RendererManager.h"
 
+
 RendererManager* RendererManager::Instance = nullptr;
 
 RendererManager::RendererManager()
@@ -16,11 +17,11 @@ RendererManager::~RendererManager()
 
 }
 
-void RendererManager::DrawAllRenderersInOrder(sf::RenderWindow& window) const
+void RendererManager::DrawAllRenderersInOrder(sf::RenderWindow& window,CameraNode& camera) const
 {
     for (RendererNode* renderer : renderers)
     {
-        renderer->Draw(window);
+        renderer->Draw(window,camera);
     }
 }
 
@@ -52,4 +53,5 @@ void RendererManager::UnregisterRenderer(RendererNode* renderer)
 
 void RendererManager::UpdateRendererLayer(RendererNode* renderer)
 {
+
 }

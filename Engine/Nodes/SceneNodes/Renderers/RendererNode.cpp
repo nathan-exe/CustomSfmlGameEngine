@@ -4,15 +4,14 @@
 
 #include "RendererNode.h"
 
-#include "../../../Rendering/RendererManager.h"
 
-RendererNode::RendererNode(const string& name) : SceneNode(name)
+RendererNode::RendererNode(const std::string& name) : SceneNode(name)
 {
-    cout<<"constructor Renderer"<<endl;
-    RendererManager::Instance->RegisterRenderer(this);
+    std::cout<<"constructor Renderer"<< std::endl;
+    //RendererManager::Instance->RegisterRenderer(this);
 }
 
 RendererNode::~RendererNode()
 {
-    RendererManager::Instance->UnregisterRenderer(this);
+    //RendererManager::Instance->UnregisterRenderer(this);
 }

@@ -10,7 +10,11 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include<filesystem>
-
+#include <iostream>
+#include <ranges>
+#include <SFML/System/Exception.hpp>
+using namespace std::filesystem;
+using std::cout,std::cerr,std::endl;
 using std::string;
 
 class SpriteManager

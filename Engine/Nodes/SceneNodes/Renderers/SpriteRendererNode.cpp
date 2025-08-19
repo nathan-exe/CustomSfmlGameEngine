@@ -4,21 +4,15 @@
 
 #include "SpriteRendererNode.h"
 
-#include "../../../Rendering/SpriteManager.h"
-
 SpriteRendererNode::SpriteRendererNode(const std::string& name, const std::string& SpriteName) : RendererNode(name)
 {
     cout<<"constructor SpriteRenderer. sprintename : "<<SpriteName<<endl;
     spriteName = SpriteName;
 }
 
-void SpriteRendererNode::Draw(sf::RenderWindow& window)
+void SpriteRendererNode::Draw(sf::RenderWindow& window,CameraNode& Camera)
 {
     sf::Sprite sprite = SpriteManager::Instance->GetSprite(spriteName);
 
-    sprite.setPosition(getPosition());
-    sprite.setRotation(getRotation());
-    sprite.setScale(getScale());
-
-    window.draw(sprite);
+    window.draw(sprite,GetScreenTransform(Camera.GetViewMatrix()));
 }

@@ -7,13 +7,14 @@
 #include "RendererNode.h"
 #include <string>
 #include <SFML/Graphics/RenderWindow.hpp>
-
+#include "../CameraNode.h"
+#include "../../../Rendering/SpriteManager.h"
 
 class SpriteRendererNode : public RendererNode
 {
 public :
     SpriteRendererNode(const std::string& name,const std::string& SpriteName);
-    void Draw(sf::RenderWindow& window) override;
+    void Draw(sf::RenderWindow& window,CameraNode& Camera) override;
 
 private :
     string spriteName;

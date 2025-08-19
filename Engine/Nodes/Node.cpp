@@ -4,11 +4,6 @@
 
 #include "Node.h"
 
-#include <functional>
-#include <sstream>
-#include <SFML/System/Exception.hpp>
-
-
 Node::Node(const string& name )
 {
     Name = name;
