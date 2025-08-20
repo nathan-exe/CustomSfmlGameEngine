@@ -17,11 +17,15 @@ RendererManager::~RendererManager()
 
 }
 
-void RendererManager::DrawAllRenderersInOrder(sf::RenderWindow& window,CameraNode& camera) const
+void RendererManager::DrawAllRenderersInOrder(CameraNode& camera) const
 {
+    cout<<"renderer count : "<<renderers.size()<<endl;
+    cout<<"window : "<<&camera.renderTarget<<endl;
+    cout<<"camera: "<<&camera<<endl;
     for (RendererNode* renderer : renderers)
     {
-        renderer->Draw(window,camera);
+        cout<<"Renderer : "<<renderer->Name<<endl;
+        renderer->Draw(camera);
     }
 }
 

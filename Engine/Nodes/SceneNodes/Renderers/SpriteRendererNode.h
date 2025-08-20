@@ -14,7 +14,7 @@ class SpriteRendererNode : public RendererNode
 {
 public :
     SpriteRendererNode(const std::string& name,const std::string& SpriteName);
-    void Draw(sf::RenderWindow& window,CameraNode& Camera) override;
+    void Draw(CameraNode& Camera) override;
 
 private :
     string spriteName;

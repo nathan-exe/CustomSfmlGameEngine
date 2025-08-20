@@ -23,6 +23,11 @@ void Game::LoadScene()
     (*player->Children.begin())->AddChild(new SceneNode("PlayerMovement"));
     player->AddChild(new SpriteRendererNode("SpriteRenderer","player"));
 
+    CameraNode* camera = new CameraNode("Camera",&Window);
+    CameraNode::Current = camera;
+    camera->worldHeight = 10;
+    sceneRoot->AddChild(camera);
+
     for (int i =0;i<10;i++)
     {
         SpriteRendererNode* sr = new SpriteRendererNode("SpriteRenderer_decor_"+std::to_string(i),"test");
@@ -100,7 +105,14 @@ void Game::DrawGame()
 {
     Window.clear(sf::Color::Black);
 
-    //RendererManager::Instance->DrawAllRenderersInOrder(Window,);
+    try
+    {
+        RendererManager::Instance->DrawAllRenderersInOrder(*(static_cast<CameraNode*>(sceneRoot->FindChildWithName("Camera"))));
+    }
+    catch (sf::Exception e)
+    {
+        cerr<<e.what()<<std::endl;
+    }
 
     Window.display();
 }

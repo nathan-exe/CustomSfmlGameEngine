@@ -16,7 +16,7 @@ public:
     ~RendererManager();
     static RendererManager* Instance;
 
-    void DrawAllRenderersInOrder(sf::RenderWindow& window,CameraNode& camera) const;
+    void DrawAllRenderersInOrder(CameraNode& camera) const;
     void PrintAllRenderersInOrder() const;
 
     void RegisterRenderer(RendererNode* renderer);

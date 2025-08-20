@@ -7,14 +7,16 @@
 #include <string>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "../CameraNode.h"
-//#include "../../../../Engine/Rendering/RendererManager.h"
+//class RendererManager;
+
+
 
 class RendererNode : public SceneNode
 {
 public:
     RendererNode(const std::string& name);
     ~RendererNode();
-    virtual void Draw(sf::RenderWindow& window,CameraNode& Camera) = 0;
+    virtual void Draw(CameraNode& Camera) = 0;
 
 public:
     int layer = 0;

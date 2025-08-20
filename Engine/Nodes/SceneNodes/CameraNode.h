@@ -5,6 +5,7 @@
 #ifndef TESTSFML_CAMERANODE_H
 #define TESTSFML_CAMERANODE_H
 
+#include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Window/Window.hpp>
 #include "SceneNode.h"
 
@@ -13,14 +14,15 @@
 class CameraNode : public SceneNode
 {
 public :
-    CameraNode(std::string name,sf::Window* window);
+    CameraNode(const std::string& name,sf::RenderTarget* RenderTarget);
     static CameraNode* Current;
 
     sf::Transform GetViewMatrix() const;
     float worldHeight = 0;
+    const int PixelsPerUnit = 12;
 
-private :
-    sf::Window* window = nullptr;
+public :
+    sf::RenderTarget* renderTarget = nullptr;
 
 };
 

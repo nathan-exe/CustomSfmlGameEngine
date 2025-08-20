@@ -10,9 +10,10 @@ SpriteRendererNode::SpriteRendererNode(const std::string& name, const std::strin
     spriteName = SpriteName;
 }
 
-void SpriteRendererNode::Draw(sf::RenderWindow& window,CameraNode& Camera)
+void SpriteRendererNode::Draw(CameraNode& Camera)
 {
     sf::Sprite sprite = SpriteManager::Instance->GetSprite(spriteName);
-
-    window.draw(sprite,GetScreenTransform(Camera.GetViewMatrix()));
+    cout<<"sprite : "<<&sprite<<endl;
+    cout<<"view Matrix : "<<Camera.GetViewMatrix().getMatrix()<<endl;
+    Camera.renderTarget->draw(sprite,GetScreenTransform(Camera.GetViewMatrix()));
 }
