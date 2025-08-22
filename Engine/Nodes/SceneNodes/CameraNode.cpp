@@ -13,6 +13,7 @@ CameraNode* CameraNode::Current = nullptr;
 
 sf::Transform CameraNode::GetViewMatrix() const
 {
+    //todo: pb ici
     sf::Transform view = sf::Transform::Identity;
     float heightRatioFromWorldToWindow = renderTarget->getSize().y/(worldHeight*PixelsPerUnit);
 

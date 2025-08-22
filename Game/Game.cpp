@@ -2,7 +2,6 @@
 // Created by Nathan on 12/08/2025.
 //
 #include "Game.h"
-
 Game::Game()=default;
 
 Game::~Game()
@@ -23,10 +22,15 @@ void Game::LoadScene()
     (*player->Children.begin())->AddChild(new SceneNode("PlayerMovement"));
     player->AddChild(new SpriteRendererNode("SpriteRenderer","player"));
 
-    CameraNode* camera = new CameraNode("Camera",&Window);
+    camera = new CameraNode("Camera",&Window);
     CameraNode::Current = camera;
     camera->worldHeight = 10;
     sceneRoot->AddChild(camera);
+
+    //todo : ça suce
+    sf::Transform t  = sf::Transform::Identity;
+    t.translate(sf::Vector2f(100,100));
+    camera->SetWorldTransform(t);
 
     for (int i =0;i<10;i++)
     {
@@ -96,6 +100,25 @@ void Game::HandleWindowEvents()
             if (key->scancode == sf::Keyboard::Scancode::Escape)
             {
                 Window.close();
+            }
+
+            //test
+            switch (key->scancode)
+            {
+            case sf::Keyboard::Scancode::A:
+                camera->Move(Vector2<float>(-1,0));
+                break;
+            case sf::Keyboard::Scancode::D:
+                camera->Move(Vector2<float>(1,0));
+                break;
+            case sf::Keyboard::Scancode::W:
+                camera->Move(Vector2<float>(0,1));
+                break;
+            case sf::Keyboard::Scancode::S:
+                camera->Move(Vector2<float>(0,-1));
+                break;
+            default:
+                break;
             }
         }
     }

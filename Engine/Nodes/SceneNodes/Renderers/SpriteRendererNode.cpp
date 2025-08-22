@@ -13,7 +13,7 @@ SpriteRendererNode::SpriteRendererNode(const std::string& name, const std::strin
 void SpriteRendererNode::Draw(CameraNode& Camera)
 {
     sf::Sprite sprite = SpriteManager::Instance->GetSprite(spriteName);
-    cout<<"sprite : "<<&sprite<<endl;
-    cout<<"view Matrix : "<<Camera.GetViewMatrix().getMatrix()<<endl;
+    //cout<<"sprite : "<<&sprite<<endl;
+    //cout<<"view Matrix : "<<Camera.GetViewMatrix().getMatrix()<<endl;
     Camera.renderTarget->draw(sprite,GetScreenTransform(Camera.GetViewMatrix()));
 }

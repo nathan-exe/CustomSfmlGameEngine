@@ -26,6 +26,7 @@ private :
   SpriteManager spriteManager;
   RendererManager rendererManager;
   SceneNode* sceneRoot = nullptr;
+  CameraNode* camera = nullptr;
 };
 
 

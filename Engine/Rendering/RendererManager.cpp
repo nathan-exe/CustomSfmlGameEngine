@@ -19,12 +19,12 @@ RendererManager::~RendererManager()
 
 void RendererManager::DrawAllRenderersInOrder(CameraNode& camera) const
 {
-    cout<<"renderer count : "<<renderers.size()<<endl;
-    cout<<"window : "<<&camera.renderTarget<<endl;
-    cout<<"camera: "<<&camera<<endl;
+    //cout<<"renderer count : "<<renderers.size()<<endl;
+    //cout<<"window : "<<&camera.renderTarget<<endl;
+    //cout<<"camera: "<<&camera<<endl;
     for (RendererNode* renderer : renderers)
     {
-        cout<<"Renderer : "<<renderer->Name<<endl;
+        //cout<<"Renderer : "<<renderer->Name<<endl;
         renderer->Draw(camera);
     }
 }

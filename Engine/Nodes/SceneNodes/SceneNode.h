@@ -8,7 +8,7 @@
 
 #include <SFML/Graphics/Transform.hpp>
 #include <SFML/System/Vector2.hpp>
-
+#include "../../Utils/DataSerializer.h"
 #include "../Node.h"
 
 using sf::Vector2,sf::Angle;
@@ -21,11 +21,14 @@ public:
     sf::Transform GetLocalToWorldTransform() const;
     sf::Transform GetWorldToLocalTransform() const;
     void SetWorldTransform(const sf::Transform& newWorldTransform);
+    void Move(const sf::Vector2f& offset);
 
     sf::Transform GetScreenTransform(const sf::Transform& viewMatrix) const;
 
+
+
 private :
-    sf::Transform localTransform;
+    sf::Transform localTransform = sf::Transform::Identity;
 
 
 };

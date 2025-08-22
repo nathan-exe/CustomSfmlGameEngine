@@ -25,6 +25,8 @@ add_executable(testSFML main.cpp
         Engine/Nodes/SceneNodes/CameraNode.cpp
         Engine/Nodes/SceneNodes/CameraNode.h
         Engine/Dependencies.h
+        Engine/Utils/DataSerializer.cpp
+        Engine/Utils/DataSerializer.h
 
 
 )
