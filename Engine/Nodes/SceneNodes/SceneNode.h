@@ -23,10 +23,6 @@ public:
     void SetWorldTransform(const sf::Transform& newWorldTransform);
     void Move(const sf::Vector2f& offset);
 
-    sf::Transform GetScreenTransform(const sf::Transform& viewMatrix) const;
-
-
-
 private :
     sf::Transform localTransform = sf::Transform::Identity;
 

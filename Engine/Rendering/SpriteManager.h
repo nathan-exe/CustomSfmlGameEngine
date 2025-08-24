@@ -25,7 +25,7 @@ public :
     ~SpriteManager();
 
     void LoadAllTexturesInDirectory(const string& directory ); //should be called early
-    void CreateSprite(const string& spriteName,const string& textureToUse,sf::IntRect rect);
+    void CreateSprite(const string& spriteName, const string& textureToUse, sf::IntRect rect, sf::Vector2f origin = {0,0});
     [[nodiscard]] bool HasSprite(const string& spriteName) const;
     [[nodiscard]] const sf::Sprite GetSprite(const string& spriteName) const;
     bool TryGetSprite(string& spriteName, sf::Sprite* p_Sprite) const;

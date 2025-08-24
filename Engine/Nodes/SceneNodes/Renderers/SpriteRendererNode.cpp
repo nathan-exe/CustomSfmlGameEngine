@@ -14,11 +14,16 @@ void SpriteRendererNode::Draw(CameraNode& Camera)
 {
     sf::Sprite sprite = SpriteManager::Instance->GetSprite(spriteName);
 
+    sf::Transform texelToLocal = sf::Transform::Identity;
+    float invPixelsPerUnits = 1.0f/Camera.PixelsPerUnit;//suggestion : sauvegarder ça dans la cam direct
+    texelToLocal.scale({invPixelsPerUnits,-invPixelsPerUnits});
+    //texelToLocal.translate(-sprite.getOrigin());
+
     sf::Transform worldToScreen =  (Camera.WorldToScreenMatrix());
-    sf::Transform texelToWorld = sf::Transform::Identity;
-    texelToWorld.scale(Vector2<float>(1.0f / Camera.Current->PixelsPerUnit,1.0f/ Camera.Current->PixelsPerUnit));
 
-    //todo : origine du sprite
+    sf::Transform localToScreen = worldToScreen * GetLocalToWorldTransform() * texelToLocal;
+    //cout<<"world transform : \n"<<DataSerializer::TransformToString(localToScreen);
+    //cout<<"screen transform : \n"<<DataSerializer::TransformToString(localToScreen);
 
-    Camera.renderTarget->draw(sprite,worldToScreen * GetWorldToLocalTransform()*texelToWorld);
+    Camera.renderTarget->draw(sprite,localToScreen);
 }

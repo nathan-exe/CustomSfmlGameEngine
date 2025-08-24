@@ -2,6 +2,8 @@
 // Created by Nathan on 12/08/2025.
 //
 #include "Game.h"
+
+#include "../Engine/Nodes/SceneNodes/Renderers/DotRendererNode.h"
 Game::Game()=default;
 
 Game::~Game()
@@ -23,6 +25,10 @@ void Game::LoadScene()
     Handle->AddChild(RotationOrigin);
     RotationOrigin->Move(Vector2<float>(0,3));
 
+    DotRendererNode* dot = new DotRendererNode("Dot");
+    dot->SetParent(Handle);
+    dot->SetWorldTransform(Handle->GetWorldToLocalTransform());
+
     //for
     //SceneNode* wing = new SpriteRendererNode("wing","paperMill_Wing");
     //wing->SetWorldTransform(RotationOrigin->GetWorldToLocalTransform());
@@ -39,8 +45,6 @@ void Game::LoadScene()
     camera->worldHeight = 10;
     sceneRoot->AddChild(camera);
 
-    //todo : ça suce
-    camera->Move(Vector2<float>(-5,-3));
 
     /*for (int i =0;i<10;i++)
     {
@@ -56,7 +60,7 @@ void Game::init()
 {
     //window creation
     Window = sf::RenderWindow(
-        sf::VideoMode({1300, 200}),
+        sf::VideoMode({800, 600}),
         "My window",
         sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar,
         sf::State::Windowed);
@@ -68,8 +72,8 @@ void Game::init()
     spriteManager.LoadAllTexturesInDirectory("Shared");
     spriteManager.CreateSprite("test","tileset_enviro.png",sf::IntRect({0,0},{12,12}));
     spriteManager.CreateSprite("player","tileset_enviro.png",sf::IntRect({0,0},{12,12}));
-    spriteManager.CreateSprite("paperMill_Handle","testScan.png",sf::IntRect({50,50},{100,200}));
-    spriteManager.CreateSprite("paperMill_Wing","testScan.png",sf::IntRect({200,150},{50,100}));
+    spriteManager.CreateSprite("paperMill_Handle","testScan.png",sf::IntRect({50,50},{100,200}),{50,20});
+    spriteManager.CreateSprite("paperMill_Wing","testScan.png",sf::IntRect({200,150},{50,100}),{25,0});
 
     //renderer manager
     //rendererManager = RendererManager();

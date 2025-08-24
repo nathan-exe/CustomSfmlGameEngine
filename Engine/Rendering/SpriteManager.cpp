@@ -62,16 +62,20 @@ void SpriteManager::LoadAllTexturesInDirectory(const string& directory)
 
 }
 
-void SpriteManager::CreateSprite(const string& spriteName,const string& textureToUse, sf::IntRect rect)
+void SpriteManager::CreateSprite(const string& spriteName, const string& textureToUse, sf::IntRect rect, sf::Vector2f origin)
 {
     if (m_textures.contains(textureToUse))
     {
         if (m_sprites.contains(spriteName))
             throw sf::Exception("sprite with name '" + spriteName + "' Already exists !");
 
+        auto sprite = sf::Sprite(m_textures[textureToUse],rect);
+        sprite.setOrigin({origin.x,rect.size.y-origin.y});
+
+
         m_sprites.insert({
                 spriteName,
-                sf::Sprite(m_textures[textureToUse],rect)
+                sprite
         }) ;
 
     }else

@@ -44,14 +44,11 @@ void SceneNode::Move(const sf::Vector2f& offset)
 
     //localTransform = world;
     SetWorldTransform(world);
+
     cout<<"new world : \n"<< DataSerializer::TransformToString(world)<<endl;
     cout<<"new local : \n"<< DataSerializer::TransformToString(localTransform)<<endl;
 }
 
-sf::Transform SceneNode::GetScreenTransform(const sf::Transform& viewMatrix) const
-{
-    return viewMatrix * GetLocalToWorldTransform();
-}
 
 
 

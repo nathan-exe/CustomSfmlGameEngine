@@ -7,7 +7,6 @@
 
 RendererNode::RendererNode(const std::string& name) : SceneNode(name)
 {
-    std::cout<<"constructor Renderer"<< std::endl;
     RendererManager::Instance->RegisterRenderer(this);
 }
 
