@@ -10,14 +10,12 @@
 class DotRendererNode : public RendererNode
 {
 public:
-    DotRendererNode(const std::string& name)
-        : RendererNode(name)
-    {
-    }
+    DotRendererNode(const std::string& name,sf::Color color);
 
     void Draw(CameraNode& Camera) override;
 
-
+private:
+    sf::Color color;
 };
 
 

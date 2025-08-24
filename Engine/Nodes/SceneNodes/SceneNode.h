@@ -8,6 +8,7 @@
 
 #include <SFML/Graphics/Transform.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/System/Angle.hpp>
 #include "../../Utils/DataSerializer.h"
 #include "../Node.h"
 
@@ -22,6 +23,8 @@ public:
     sf::Transform GetWorldToLocalTransform() const;
     void SetWorldTransform(const sf::Transform& newWorldTransform);
     void Move(const sf::Vector2f& offset);
+    void Rotate(float angle);
+    void SetLocalTransform(const sf::Transform& newLocalTransform);
 
 private :
     sf::Transform localTransform = sf::Transform::Identity;

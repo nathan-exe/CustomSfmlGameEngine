@@ -15,7 +15,7 @@ SceneNode::SceneNode(const string& name) : Node(name)
 sf::Transform SceneNode::GetLocalToWorldTransform() const
 {
     if (Parent == nullptr) return localTransform;
-    return localTransform * static_cast<SceneNode*>(Parent)->GetLocalToWorldTransform();
+    return static_cast<SceneNode*>(Parent)->GetLocalToWorldTransform()*localTransform ;
 }
 
 sf::Transform SceneNode::GetWorldToLocalTransform() const
@@ -27,9 +27,23 @@ void SceneNode::SetWorldTransform(const sf::Transform& newWorldTransform)
 {
     //todo : bug ici
     //ça pue.
-    cout<<"world to local : \n"<<DataSerializer::TransformToString(GetWorldToLocalTransform());
+    //cout<<"world to local : \n"<<DataSerializer::TransformToString(GetWorldToLocalTransform());
     localTransform = localTransform * newWorldTransform * GetWorldToLocalTransform() ;
 }
+
+void SceneNode::Rotate(float angle)
+{
+    sf::Angle a = sf::degrees(angle);
+    sf::Transform boule = sf::Transform::Identity;
+    boule.rotate(a);
+    localTransform =  localTransform*boule;
+}
+
+void SceneNode::SetLocalTransform(const sf::Transform& newLocalTransform)
+{
+    localTransform = newLocalTransform;
+}
+
 
 void SceneNode::Move(const sf::Vector2f& offset)
 {

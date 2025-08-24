@@ -21,28 +21,29 @@ void Game::LoadScene()
     SceneNode* Handle = new SpriteRendererNode("PaperMill","paperMill_Handle");
     sceneRoot->AddChild(Handle);
 
-    SceneNode* RotationOrigin = new SceneNode("RotationOrigin");
+    DotRendererNode* RotationOrigin = new DotRendererNode("RotationOrigin", sf::Color::Blue);
     Handle->AddChild(RotationOrigin);
     RotationOrigin->Move(Vector2<float>(0,3));
 
-    DotRendererNode* dot = new DotRendererNode("Dot");
+    DotRendererNode* dot = new DotRendererNode("Dot", sf::Color::Red);
     dot->SetParent(Handle);
     dot->SetWorldTransform(Handle->GetWorldToLocalTransform());
 
     //for
-    //SceneNode* wing = new SpriteRendererNode("wing","paperMill_Wing");
-    //wing->SetWorldTransform(RotationOrigin->GetWorldToLocalTransform());
-    //RotationOrigin->AddChild(wing);
+    int c = 3;
+    for (int i =0;i<c;i++)
+    {
+        SceneNode* wing = new SpriteRendererNode("wing","paperMill_Wing");
+        RotationOrigin->AddChild(wing);
+        wing->SetLocalTransform(sf::Transform::Identity);
+        wing->Rotate(360.0f/(float)c*i);
+        //RotationOrigin->Rotate(360.0f/3.0f);
+    }
 
-    //player->AddChild(new SceneNode("Collider"));
-    //player->AddChild(new SceneNode("InputManager"));
-    //(*player->Children.begin())->AddChild(new SceneNode("RigidBody"));
-    //(*player->Children.begin())->AddChild(new SceneNode("PlayerMovement"));
-    //player->AddChild(new SpriteRendererNode("SpriteRenderer","player"));
 
     camera = new CameraNode("Camera",&Window);
     CameraNode::Current = camera;
-    camera->worldHeight = 10;
+    camera->worldHeight = 30;
     sceneRoot->AddChild(camera);
 
 
@@ -60,10 +61,10 @@ void Game::init()
 {
     //window creation
     Window = sf::RenderWindow(
-        sf::VideoMode({800, 600}),
+        sf::VideoMode({1920, 1080}),
         "My window",
         sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar,
-        sf::State::Windowed);
+        sf::State::Fullscreen);
 
     Window.setVerticalSyncEnabled(true);
 
@@ -88,6 +89,7 @@ void Game::run()
     init();
 
     // run the program as long as the window is open
+    clock = sf::Clock();
     while (Window.isOpen())
     {
         try
@@ -99,6 +101,8 @@ void Game::run()
             std::cerr<<e.what()<<std::endl;
         }
 
+        deltaTime = clock.getElapsedTime().asSeconds();
+        clock.restart();
     }
 
 }
@@ -146,6 +150,7 @@ void Game::DrawGame()
 
     try
     {
+        static_cast<SceneNode*>(sceneRoot->FindChildAtPath("PaperMill/RotationOrigin"))->Rotate(120*deltaTime);//temp
         RendererManager::Instance->DrawAllRenderersInOrder(*CameraNode::Current);
     }
     catch (sf::Exception e)

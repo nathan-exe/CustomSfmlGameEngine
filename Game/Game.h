@@ -27,6 +27,8 @@ private :
   RendererManager rendererManager;
   SceneNode* sceneRoot = nullptr;
   CameraNode* camera = nullptr;
+  sf::Clock clock;
+  float deltaTime;
 };
 
 
