@@ -14,13 +14,25 @@ void Game::LoadScene()
 {
     //scene hierarchy
     sceneRoot = new SceneNode("SceneRoot");
-    SceneNode* player = new SceneNode("Player");
-    sceneRoot->AddChild(player);
-    player->AddChild(new SceneNode("Collider"));
-    player->AddChild(new SceneNode("InputManager"));
-    (*player->Children.begin())->AddChild(new SceneNode("RigidBody"));
-    (*player->Children.begin())->AddChild(new SceneNode("PlayerMovement"));
-    player->AddChild(new SpriteRendererNode("SpriteRenderer","player"));
+    //SceneNode* player = new SceneNode("Player");
+
+    SceneNode* Handle = new SpriteRendererNode("PaperMill","paperMill_Handle");
+    sceneRoot->AddChild(Handle);
+
+    SceneNode* RotationOrigin = new SceneNode("RotationOrigin");
+    Handle->AddChild(RotationOrigin);
+    RotationOrigin->Move(Vector2<float>(0,3));
+
+    //for
+    //SceneNode* wing = new SpriteRendererNode("wing","paperMill_Wing");
+    //wing->SetWorldTransform(RotationOrigin->GetWorldToLocalTransform());
+    //RotationOrigin->AddChild(wing);
+
+    //player->AddChild(new SceneNode("Collider"));
+    //player->AddChild(new SceneNode("InputManager"));
+    //(*player->Children.begin())->AddChild(new SceneNode("RigidBody"));
+    //(*player->Children.begin())->AddChild(new SceneNode("PlayerMovement"));
+    //player->AddChild(new SpriteRendererNode("SpriteRenderer","player"));
 
     camera = new CameraNode("Camera",&Window);
     CameraNode::Current = camera;
@@ -28,16 +40,14 @@ void Game::LoadScene()
     sceneRoot->AddChild(camera);
 
     //todo : ça suce
-    sf::Transform t  = sf::Transform::Identity;
-    t.translate(sf::Vector2f(100,100));
-    camera->SetWorldTransform(t);
+    camera->Move(Vector2<float>(-5,-3));
 
-    for (int i =0;i<10;i++)
+    /*for (int i =0;i<10;i++)
     {
         SpriteRendererNode* sr = new SpriteRendererNode("SpriteRenderer_decor_"+std::to_string(i),"test");
         //sr->setPosition({static_cast<float>(i),static_cast<float>(i)});
         sceneRoot->AddChild(sr);
-    }
+    }*/
 
     sceneRoot->PrintTree();
 }
@@ -46,7 +56,7 @@ void Game::init()
 {
     //window creation
     Window = sf::RenderWindow(
-        sf::VideoMode({800, 600}),
+        sf::VideoMode({1300, 200}),
         "My window",
         sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar,
         sf::State::Windowed);
@@ -56,8 +66,10 @@ void Game::init()
     //sprite manager
     //spriteManager = SpriteManager();
     spriteManager.LoadAllTexturesInDirectory("Shared");
-    spriteManager.CreateSprite("test","tileset_enviro.png",sf::IntRect({0,0},{16,16}));
-    spriteManager.CreateSprite("player","tileset_enviro.png",sf::IntRect({16,16},{16,16}));
+    spriteManager.CreateSprite("test","tileset_enviro.png",sf::IntRect({0,0},{12,12}));
+    spriteManager.CreateSprite("player","tileset_enviro.png",sf::IntRect({0,0},{12,12}));
+    spriteManager.CreateSprite("paperMill_Handle","testScan.png",sf::IntRect({50,50},{100,200}));
+    spriteManager.CreateSprite("paperMill_Wing","testScan.png",sf::IntRect({200,150},{50,100}));
 
     //renderer manager
     //rendererManager = RendererManager();
@@ -106,16 +118,16 @@ void Game::HandleWindowEvents()
             switch (key->scancode)
             {
             case sf::Keyboard::Scancode::A:
-                camera->Move(Vector2<float>(-1,0));
+                static_cast<SceneNode*>(sceneRoot->FindChildWithName("PaperMill"))->Move(Vector2<float>(-1,0));
                 break;
             case sf::Keyboard::Scancode::D:
-                camera->Move(Vector2<float>(1,0));
+                 static_cast<SceneNode*>(sceneRoot->FindChildWithName("PaperMill"))->Move(Vector2<float>(1,0));
                 break;
             case sf::Keyboard::Scancode::W:
-                camera->Move(Vector2<float>(0,1));
+                 static_cast<SceneNode*>(sceneRoot->FindChildWithName("PaperMill"))->Move(Vector2<float>(0,1));
                 break;
             case sf::Keyboard::Scancode::S:
-                camera->Move(Vector2<float>(0,-1));
+                 static_cast<SceneNode*>(sceneRoot->FindChildWithName("PaperMill"))->Move(Vector2<float>(0,-1));
                 break;
             default:
                 break;
@@ -126,11 +138,11 @@ void Game::HandleWindowEvents()
 
 void Game::DrawGame()
 {
-    Window.clear(sf::Color::Black);
+    Window.clear(sf::Color::White);
 
     try
     {
-        RendererManager::Instance->DrawAllRenderersInOrder(*(static_cast<CameraNode*>(sceneRoot->FindChildWithName("Camera"))));
+        RendererManager::Instance->DrawAllRenderersInOrder(*CameraNode::Current);
     }
     catch (sf::Exception e)
     {

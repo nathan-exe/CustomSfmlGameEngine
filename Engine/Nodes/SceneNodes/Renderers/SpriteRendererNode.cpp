@@ -13,7 +13,12 @@ SpriteRendererNode::SpriteRendererNode(const std::string& name, const std::strin
 void SpriteRendererNode::Draw(CameraNode& Camera)
 {
     sf::Sprite sprite = SpriteManager::Instance->GetSprite(spriteName);
-    //cout<<"sprite : "<<&sprite<<endl;
-    //cout<<"view Matrix : "<<Camera.GetViewMatrix().getMatrix()<<endl;
-    Camera.renderTarget->draw(sprite,GetScreenTransform(Camera.GetViewMatrix()));
+
+    sf::Transform worldToScreen =  (Camera.WorldToScreenMatrix());
+    sf::Transform texelToWorld = sf::Transform::Identity;
+    texelToWorld.scale(Vector2<float>(1.0f / Camera.Current->PixelsPerUnit,1.0f/ Camera.Current->PixelsPerUnit));
+
+    //todo : origine du sprite
+
+    Camera.renderTarget->draw(sprite,worldToScreen * GetWorldToLocalTransform()*texelToWorld);
 }

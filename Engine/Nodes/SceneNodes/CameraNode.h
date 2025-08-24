@@ -17,9 +17,9 @@ public :
     CameraNode(const std::string& name,sf::RenderTarget* RenderTarget);
     static CameraNode* Current;
 
-    sf::Transform GetViewMatrix() const;
+    sf::Transform WorldToScreenMatrix() const;
     float worldHeight = 0;
-    const int PixelsPerUnit = 12;
+    const int PixelsPerUnit = 50;
 
 public :
     sf::RenderTarget* renderTarget = nullptr;
