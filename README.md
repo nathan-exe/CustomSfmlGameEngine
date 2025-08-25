@@ -5,12 +5,13 @@
 - A godot-like tree structure for game objects
   ### Nodes list :
   - Scene Node
+    - Camera Node
     - Renderer Node
       - Sprite Renderer Node
+      - Dot Renderer Node
         
 ## Incoming Features :
 - Collision detection and collider nodes
-- Camera Node
 - Tilemap node
 - 2D parallaxe
 - Auto Tilemap using wave function collapse
@@ -19,6 +20,7 @@
 - Custom Scene Editor
 - Particle Systems
 ## Ideas :
+- fading background objects
 - dynamic weather system with wind and rain intensity + lightning strikes that flip the whole screens's colors
 - dynamic lightning with inverted colors + vignette
 - Water puddles with vertex displacement when the player passes through them

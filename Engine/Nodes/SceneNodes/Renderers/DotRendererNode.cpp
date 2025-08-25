@@ -7,7 +7,7 @@
 DotRendererNode::DotRendererNode(const std::string& name, sf::Color color)
  : RendererNode(name)
 {
-    //color.a = 120;
+    color.a = 120;
     this->color = color;
 }
 
@@ -20,9 +20,7 @@ void DotRendererNode::Draw(CameraNode& Camera)
     Transform worldToScreen =  (Camera.WorldToScreenMatrix());
     Transform localToScreen = worldToScreen * GetWorldTransform();
 
-#ifdef SFML_DEBUG
     Camera.renderTarget->draw(circle,localToScreen);
-#endif
 }
 
 
