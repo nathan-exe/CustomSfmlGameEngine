@@ -12,22 +12,40 @@
 #include "../../Utils/DataSerializer.h"
 #include "../Node.h"
 
-using sf::Vector2,sf::Angle;
+using sf::Vector2,sf::Angle,sf::Vector2f,sf::Transform;
 
 class SceneNode : public Node
 {
 public:
     SceneNode(const string& name);
 
-    sf::Transform GetLocalToWorldTransform() const;
-    sf::Transform GetWorldToLocalTransform() const;
-    void SetWorldTransform(const sf::Transform& newWorldTransform);
-    void Move(const sf::Vector2f& offset);
-    void Rotate(float angle);
-    void SetLocalTransform(const sf::Transform& newLocalTransform);
+    [[nodiscard]] Transform GetWorldTransform() const;
+    [[nodiscard]] Transform GetWorldToLocalTransform() const;
+    void ResetLocalTransform();
+
+    void Move(const Vector2f& offset);
+    void Rotate(const Angle& angle);
+    void Scale(const Vector2f& scale);
+
+    [[nodiscard]] Vector2f GetLocalPosition() const;
+    [[nodiscard]] Vector2f GetLocalScale() const;
+    [[nodiscard]] Angle GetLocalAngle() const;
+
+    [[nodiscard]] Vector2f GetWorldPosition() const;
+    [[nodiscard]] Angle GetWorldAngle() const;
+
+    void SetLocalPosition(const Vector2f& newPosition);
+    void SetLocalScale(const Vector2f& newScale);
+    void SetLocalAngle(const Angle& angle);
+
+    void SetWorldPosition(const Vector2f& newPosition);
+    void SetWorldAngle(const Angle& angle);
+
 
 private :
-    sf::Transform localTransform = sf::Transform::Identity;
+    Angle localAngle;
+    Vector2f localPosition = {0,0};
+    Vector2f localScale = {1,1};
 
 
 };

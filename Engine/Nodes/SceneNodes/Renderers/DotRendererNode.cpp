@@ -18,7 +18,7 @@ void DotRendererNode::Draw(CameraNode& Camera)
     circle.setOrigin({circle.getRadius(),circle.getRadius()});
     sf::Transform worldToScreen =  (Camera.WorldToScreenMatrix());
 
-    sf::Transform localToScreen = worldToScreen * GetLocalToWorldTransform();
+    sf::Transform localToScreen = worldToScreen * GetWorldTransform();
 
     //Camera.renderTarget->draw(circle,localToScreen);
 }

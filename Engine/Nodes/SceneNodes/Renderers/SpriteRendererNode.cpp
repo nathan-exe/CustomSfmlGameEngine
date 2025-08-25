@@ -21,7 +21,7 @@ void SpriteRendererNode::Draw(CameraNode& Camera)
 
     sf::Transform worldToScreen =  (Camera.WorldToScreenMatrix());
 
-    sf::Transform localToScreen = worldToScreen * GetLocalToWorldTransform() * texelToLocal;
+    sf::Transform localToScreen = worldToScreen * GetWorldTransform() * texelToLocal;
     //cout<<"world transform : \n"<<DataSerializer::TransformToString(localToScreen);
     //cout<<"screen transform : \n"<<DataSerializer::TransformToString(localToScreen);
 

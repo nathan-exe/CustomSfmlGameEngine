@@ -50,7 +50,6 @@ void SpriteManager::LoadAllTexturesInDirectory(const string& directory)
                     entry.path(),
                     true);
             m_textures[entry.path().filename().string()].setSmooth(true);
-                    //sf::IntRect({10, 10}, {32, 32})); // Throws sf::Exception if an error occurs
         }
 
         cout.flush();

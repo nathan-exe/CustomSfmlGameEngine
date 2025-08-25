@@ -16,7 +16,7 @@ sf::Transform CameraNode::WorldToScreenMatrix() const
 {
     float heightRatioFromWorldToWindow = renderTarget->getSize().y/(worldHeight); //bien
 
-    sf::Transform matrix = GetLocalToWorldTransform();
+    sf::Transform matrix = GetWorldTransform();
 
     float AspectRatio = renderTarget->getSize().x/renderTarget->getSize().y;
     float worldWidth = worldHeight * AspectRatio;

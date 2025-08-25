@@ -21,13 +21,13 @@ void Game::LoadScene()
     SceneNode* Handle = new SpriteRendererNode("PaperMill","paperMill_Handle");
     sceneRoot->AddChild(Handle);
 
-    DotRendererNode* RotationOrigin = new DotRendererNode("RotationOrigin", sf::Color::Blue);
+   /* DotRendererNode* RotationOrigin = new DotRendererNode("RotationOrigin", sf::Color::Blue);
     Handle->AddChild(RotationOrigin);
     RotationOrigin->Move(Vector2<float>(0,3));
 
     DotRendererNode* dot = new DotRendererNode("Dot", sf::Color::Red);
     dot->SetParent(Handle);
-    dot->SetWorldTransform(Handle->GetWorldToLocalTransform());
+    dot->ResetLocalTransform();
 
     //for
     int c = 3;
@@ -35,11 +35,11 @@ void Game::LoadScene()
     {
         SceneNode* wing = new SpriteRendererNode("wing","paperMill_Wing");
         RotationOrigin->AddChild(wing);
-        wing->SetLocalTransform(sf::Transform::Identity);
-        wing->Rotate(360.0f/(float)c*i);
+        wing->ResetLocalTransform();
+        wing->Rotate(sf::degrees( 360.0f/(float)c*i));
         //RotationOrigin->Rotate(360.0f/3.0f);
     }
-
+*/
 
     camera = new CameraNode("Camera",&Window);
     CameraNode::Current = camera;
@@ -47,12 +47,6 @@ void Game::LoadScene()
     sceneRoot->AddChild(camera);
 
 
-    /*for (int i =0;i<10;i++)
-    {
-        SpriteRendererNode* sr = new SpriteRendererNode("SpriteRenderer_decor_"+std::to_string(i),"test");
-        //sr->setPosition({static_cast<float>(i),static_cast<float>(i)});
-        sceneRoot->AddChild(sr);
-    }*/
 
     sceneRoot->PrintTree();
 }
@@ -61,23 +55,20 @@ void Game::init()
 {
     //window creation
     Window = sf::RenderWindow(
-        sf::VideoMode({1920, 1080}),
+        sf::VideoMode({1920/3, 1080/3}),
         "My window",
         sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar,
-        sf::State::Fullscreen);
+        sf::State::Windowed);
 
     Window.setVerticalSyncEnabled(true);
 
-    //sprite manager
-    //spriteManager = SpriteManager();
+    //load sprites and textures
     spriteManager.LoadAllTexturesInDirectory("Shared");
     spriteManager.CreateSprite("test","tileset_enviro.png",sf::IntRect({0,0},{12,12}));
     spriteManager.CreateSprite("player","tileset_enviro.png",sf::IntRect({0,0},{12,12}));
     spriteManager.CreateSprite("paperMill_Handle","testScan.png",sf::IntRect({50,50},{100,200}),{50,20});
     spriteManager.CreateSprite("paperMill_Wing","testScan.png",sf::IntRect({200,150},{50,100}),{25,0});
 
-    //renderer manager
-    //rendererManager = RendererManager();
 
     LoadScene();
 
@@ -150,7 +141,7 @@ void Game::DrawGame()
 
     try
     {
-        static_cast<SceneNode*>(sceneRoot->FindChildAtPath("PaperMill/RotationOrigin"))->Rotate(120*deltaTime);//temp
+        //static_cast<SceneNode*>(sceneRoot->FindChildAtPath("PaperMill/RotationOrigin"))->Rotate(sf::degrees(120*deltaTime));//temp
         RendererManager::Instance->DrawAllRenderersInOrder(*CameraNode::Current);
     }
     catch (sf::Exception e)

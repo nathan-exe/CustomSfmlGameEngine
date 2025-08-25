@@ -12,55 +12,105 @@ SceneNode::SceneNode(const string& name) : Node(name)
 
 }
 
-sf::Transform SceneNode::GetLocalToWorldTransform() const
+sf::Transform SceneNode::GetWorldTransform() const
 {
+    sf::Transform localTransform = sf::Transform::Identity;
+    localTransform.scale(localScale);
+    localTransform.rotate(localAngle);
+    localTransform.translate(localPosition);
+    //cout<<"local transform : \n"<<DataSerializer::TransformToString(localTransform)<<endl;
+
     if (Parent == nullptr) return localTransform;
-    return static_cast<SceneNode*>(Parent)->GetLocalToWorldTransform()*localTransform ;
+    return static_cast<SceneNode*>(Parent)->GetWorldTransform()*localTransform ;
 }
 
 sf::Transform SceneNode::GetWorldToLocalTransform() const
 {
-    return GetLocalToWorldTransform().getInverse();
+    return GetWorldTransform().getInverse();
 }
 
-void SceneNode::SetWorldTransform(const sf::Transform& newWorldTransform)
+void SceneNode::ResetLocalTransform()
 {
-    //todo : bug ici
-    //ça pue.
-    //cout<<"world to local : \n"<<DataSerializer::TransformToString(GetWorldToLocalTransform());
-    localTransform = localTransform * newWorldTransform * GetWorldToLocalTransform() ;
+    localAngle = Angle::Zero;
+    localPosition = {0,0};
+    localScale = {1,1};
 }
 
-void SceneNode::Rotate(float angle)
+
+void SceneNode::Rotate(const Angle& angle)
 {
-    sf::Angle a = sf::degrees(angle);
-    sf::Transform boule = sf::Transform::Identity;
-    boule.rotate(a);
-    localTransform =  localTransform*boule;
+    localAngle += angle;
 }
 
-void SceneNode::SetLocalTransform(const sf::Transform& newLocalTransform)
+void SceneNode::Scale(const sf::Vector2f& scale)
 {
-    localTransform = newLocalTransform;
+    localScale.x *= scale.x;
+    localScale.y *= scale.y;
+}
+
+Vector2f SceneNode::GetLocalPosition() const
+{
+    return localPosition;
+}
+
+Vector2f SceneNode::GetLocalScale() const
+{
+    return localScale;
+}
+
+Angle SceneNode::GetLocalAngle() const
+{
+    return localAngle;
+}
+
+Vector2f SceneNode::GetWorldPosition() const
+{
+    Transform localToWorld = GetWorldTransform();
+    return localToWorld * localPosition;
+}
+
+Angle SceneNode::GetWorldAngle() const
+{
+    if (Parent==nullptr) return localAngle;
+    return static_cast<SceneNode*>(Parent)->GetWorldAngle() + localAngle;
+}
+
+void SceneNode::SetLocalPosition(const Vector2f& newPosition)
+{
+    localPosition = newPosition;
+}
+
+void SceneNode::SetLocalScale(const Vector2f& newScale)
+{
+    localScale = newScale;
+}
+
+void SceneNode::SetLocalAngle(const Angle& angle)
+{
+    localAngle = angle;
+}
+
+void SceneNode::SetWorldPosition(const Vector2f& newPosition)
+{
+    Transform worldToLocal = GetWorldToLocalTransform();
+    localPosition = worldToLocal.transformPoint(newPosition);//pas sur que ça marche
+}
+
+void SceneNode::SetWorldAngle(const Angle& angle)
+{
+    Angle currentWorldAngle = GetWorldAngle();
+    Angle Offset = angle - currentWorldAngle;
+    localAngle += Offset;//pas sur que ça marche
 }
 
 
 void SceneNode::Move(const sf::Vector2f& offset)
 {
-    cout<<"identity : \n"<< DataSerializer::TransformToString(sf::Transform::Identity)<<endl;
-    cout<<"local : \n"<< DataSerializer::TransformToString(localTransform)<<endl;
-    sf::Transform world = GetLocalToWorldTransform();
-    cout<<"world : \n"<< DataSerializer::TransformToString(world)<<endl;
-    //sf::Transform world = localTransform;//();
-    //cout<<world.getMatrix();
-    world.translate(offset);
+    cout<<"world offset : "<<offset.x<<','<<offset.y<<endl;
+    Vector2 worldPosition = GetWorldPosition();
+    worldPosition+=offset;
+    SetWorldPosition(worldPosition);
 
-
-    //localTransform = world;
-    SetWorldTransform(world);
-
-    cout<<"new world : \n"<< DataSerializer::TransformToString(world)<<endl;
-    cout<<"new local : \n"<< DataSerializer::TransformToString(localTransform)<<endl;
 }
 
 
