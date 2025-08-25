@@ -13,6 +13,7 @@ DotRendererNode::DotRendererNode(const std::string& name, sf::Color color)
 
 void DotRendererNode::Draw(CameraNode& Camera)
 {
+#ifdef SFML_DEBUG
     sf::CircleShape circle = sf::CircleShape(.1f);
     circle.setFillColor(color);
     circle.setOrigin({circle.getRadius(),circle.getRadius()});
@@ -21,6 +22,7 @@ void DotRendererNode::Draw(CameraNode& Camera)
     Transform localToScreen = worldToScreen * GetWorldTransform();
 
     Camera.renderTarget->draw(circle,localToScreen);
+#endif
 }
 
 
