@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<SceneNode
+        name = "root"
+        localTransform = "{0,0,1,1,0}">
+    <CameraNode
+            name="Camera"
+            localTransform="{0,10,1,1,0}"
+            worldHeight="30"
+    />
+    <SceneInstance path = "Windmill.xml"/>
+</SceneNode>
+

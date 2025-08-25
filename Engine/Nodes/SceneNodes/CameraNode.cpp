@@ -16,14 +16,18 @@ sf::Transform CameraNode::WorldToScreenMatrix() const
 {
     float heightRatioFromWorldToWindow = renderTarget->getSize().y/(worldHeight); //bien
 
-    sf::Transform matrix = GetWorldTransform();
+    Transform matrix = GetWorldToLocalTransform();
 
 
     float AspectRatio = static_cast<float>(renderTarget->getSize().x)/static_cast<float>(renderTarget->getSize().y);
     cout<<"AspectRatio: "<<AspectRatio<<endl;
 
     float worldWidth = worldHeight * AspectRatio;
-    matrix.scale(Vector2<float>(heightRatioFromWorldToWindow,-heightRatioFromWorldToWindow));
+
+    Transform scaleMatrix = Transform::Identity;
+    scaleMatrix.scale(Vector2<float>(heightRatioFromWorldToWindow,-heightRatioFromWorldToWindow));
+
+    matrix = scaleMatrix*matrix ;
 
     Transform translation = Transform::Identity;
     translation.translate({worldWidth*.5f,-worldHeight*.5f});//la translation est affectée par le scale donc faut la mettre après

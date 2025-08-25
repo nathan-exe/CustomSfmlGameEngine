@@ -41,7 +41,6 @@ public:
     void SetWorldPosition(const Vector2f& newPosition);
     void SetWorldAngle(const Angle& angle);
 
-
 private :
     Angle localAngle = sf::degrees(0);
     Vector2f localPosition = {0,0};

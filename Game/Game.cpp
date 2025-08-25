@@ -49,6 +49,7 @@ void Game::LoadScene()
     CameraNode::Current = camera;
     camera->worldHeight = 30;
     sceneRoot->AddChild(camera);
+    camera->SetWorldPosition({0,10});
 
     DotRendererNode* dot_cam = new DotRendererNode("Dot", sf::Color::Green);
     dot_cam->SetParent(camera);
@@ -124,16 +125,20 @@ void Game::HandleWindowEvents()
             switch (key->scancode)
             {
             case sf::Keyboard::Scancode::A:
-                static_cast<SceneNode*>(sceneRoot->FindChildWithName("PaperMill"))->Move(Vector2<float>(-1,0));
+                //static_cast<SceneNode*>(sceneRoot->FindChildWithName("PaperMill"))->Move(Vector2<float>(-1,0));
+                CameraNode::Current->Move(Vector2<float>(-1,0));
                 break;
             case sf::Keyboard::Scancode::D:
-                 static_cast<SceneNode*>(sceneRoot->FindChildWithName("PaperMill"))->Move(Vector2<float>(1,0));
+                 //static_cast<SceneNode*>(sceneRoot->FindChildWithName("PaperMill"))->Move(Vector2<float>(1,0));
+                 CameraNode::Current->Move(Vector2<float>(1,0));
                 break;
             case sf::Keyboard::Scancode::W:
-                 static_cast<SceneNode*>(sceneRoot->FindChildWithName("PaperMill"))->Move(Vector2<float>(0,1));
+                 //static_cast<SceneNode*>(sceneRoot->FindChildWithName("PaperMill"))->Move(Vector2<float>(0,1));
+                 CameraNode::Current->Move(Vector2<float>(0,1));
                 break;
             case sf::Keyboard::Scancode::S:
-                 static_cast<SceneNode*>(sceneRoot->FindChildWithName("PaperMill"))->Move(Vector2<float>(0,-1));
+                 //static_cast<SceneNode*>(sceneRoot->FindChildWithName("PaperMill"))->Move(Vector2<float>(0,-1));
+                 CameraNode::Current->Move(Vector2<float>(0,-1));
                 break;
             default:
                 break;
