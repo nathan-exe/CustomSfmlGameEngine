@@ -141,17 +141,18 @@ Node* Node::FindChildAtPath(string Path) const
     string name;
     constexpr char del = '/';
 
-    cout << "\nsearching for child of "<<Name<<" with relative path : "<< Path <<"\n";
+    //cout << "\nsearching for child of "<<Name<<" with relative path : "<< Path <<"\n";
 
     Node* node = const_cast<Node*>(this);
     while (getline(ss, name, del) && node!=nullptr)
     {
         node = node->FindChildWithName(name,true);
-        if (node!=nullptr) cout <<"found : "<< node->Name << "\n";
+        //if (node!=nullptr) cout <<"found : "<< node->Name << "\n";
 
     }
-    if (node !=nullptr) cout<<"found node : "<<node->Name<<endl;
-    else cout<<"could not find child at path : "<<Path<<"\n"<<endl;
+    //if (node !=nullptr) cout<<"found node : "<<node->Name<<endl;
+    //else cout<<"could not find child at path : "<<Path<<"\n"<<endl;
+    if (node==nullptr) cout<<"could not find child at path : "<<Path<<"\n"<<endl;
 
     return node;
 

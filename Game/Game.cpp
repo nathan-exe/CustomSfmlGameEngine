@@ -21,13 +21,17 @@ void Game::LoadScene()
     SceneNode* Handle = new SpriteRendererNode("PaperMill","paperMill_Handle");
     sceneRoot->AddChild(Handle);
 
-   /* DotRendererNode* RotationOrigin = new DotRendererNode("RotationOrigin", sf::Color::Blue);
+    DotRendererNode* RotationOrigin = new DotRendererNode("RotationOrigin", sf::Color::Blue);
     Handle->AddChild(RotationOrigin);
     RotationOrigin->Move(Vector2<float>(0,3));
+
+
 
     DotRendererNode* dot = new DotRendererNode("Dot", sf::Color::Red);
     dot->SetParent(Handle);
     dot->ResetLocalTransform();
+
+
 
     //for
     int c = 3;
@@ -39,13 +43,16 @@ void Game::LoadScene()
         wing->Rotate(sf::degrees( 360.0f/(float)c*i));
         //RotationOrigin->Rotate(360.0f/3.0f);
     }
-*/
+
 
     camera = new CameraNode("Camera",&Window);
     CameraNode::Current = camera;
     camera->worldHeight = 30;
     sceneRoot->AddChild(camera);
 
+    DotRendererNode* dot_cam = new DotRendererNode("Dot", sf::Color::Green);
+    dot_cam->SetParent(camera);
+    dot_cam->ResetLocalTransform();
 
 
     sceneRoot->PrintTree();
@@ -55,7 +62,7 @@ void Game::init()
 {
     //window creation
     Window = sf::RenderWindow(
-        sf::VideoMode({1920/3, 1080/3}),
+        sf::VideoMode({1920*4/5, 1080*4/5}),
         "My window",
         sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar,
         sf::State::Windowed);
@@ -141,7 +148,7 @@ void Game::DrawGame()
 
     try
     {
-        //static_cast<SceneNode*>(sceneRoot->FindChildAtPath("PaperMill/RotationOrigin"))->Rotate(sf::degrees(120*deltaTime));//temp
+        static_cast<SceneNode*>(sceneRoot->FindChildAtPath("PaperMill/RotationOrigin"))->Rotate(sf::degrees(120*deltaTime).wrapSigned());//temp
         RendererManager::Instance->DrawAllRenderersInOrder(*CameraNode::Current);
     }
     catch (sf::Exception e)

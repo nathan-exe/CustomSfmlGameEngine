@@ -43,7 +43,7 @@ public:
 
 
 private :
-    Angle localAngle;
+    Angle localAngle = sf::degrees(0);
     Vector2f localPosition = {0,0};
     Vector2f localScale = {1,1};
 

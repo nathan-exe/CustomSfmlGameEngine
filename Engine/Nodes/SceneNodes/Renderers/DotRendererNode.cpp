@@ -7,20 +7,20 @@
 DotRendererNode::DotRendererNode(const std::string& name, sf::Color color)
  : RendererNode(name)
 {
+    color.a = 120;
     this->color = color;
 }
 
 void DotRendererNode::Draw(CameraNode& Camera)
 {
     sf::CircleShape circle = sf::CircleShape(.1f);
-    //color.a = 100;
     circle.setFillColor(color);
     circle.setOrigin({circle.getRadius(),circle.getRadius()});
-    sf::Transform worldToScreen =  (Camera.WorldToScreenMatrix());
 
-    sf::Transform localToScreen = worldToScreen * GetWorldTransform();
+    Transform worldToScreen =  (Camera.WorldToScreenMatrix());
+    Transform localToScreen = worldToScreen * GetWorldTransform();
 
-    //Camera.renderTarget->draw(circle,localToScreen);
+    Camera.renderTarget->draw(circle,localToScreen);
 }
 
 

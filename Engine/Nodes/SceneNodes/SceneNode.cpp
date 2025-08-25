@@ -16,8 +16,9 @@ sf::Transform SceneNode::GetWorldTransform() const
 {
     sf::Transform localTransform = sf::Transform::Identity;
     localTransform.scale(localScale);
-    localTransform.rotate(localAngle);
     localTransform.translate(localPosition);
+    localTransform.rotate(localAngle);
+
     //cout<<"local transform : \n"<<DataSerializer::TransformToString(localTransform)<<endl;
 
     if (Parent == nullptr) return localTransform;
@@ -106,7 +107,7 @@ void SceneNode::SetWorldAngle(const Angle& angle)
 
 void SceneNode::Move(const sf::Vector2f& offset)
 {
-    cout<<"world offset : "<<offset.x<<','<<offset.y<<endl;
+    //cout<<"world offset : "<<offset.x<<','<<offset.y<<endl;
     Vector2 worldPosition = GetWorldPosition();
     worldPosition+=offset;
     SetWorldPosition(worldPosition);
