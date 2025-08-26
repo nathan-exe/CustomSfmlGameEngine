@@ -3,6 +3,7 @@
 //
 #include "Game.h"
 
+#include "../Engine/Nodes/SceneNodes/Behaviours/linearMovement/LinearRotatorNode.h"
 #include "../Engine/Nodes/SceneNodes/Renderers/DotRendererNode.h"
 Game::Game()=default;
 
@@ -20,7 +21,7 @@ void Game::LoadScene()
     SceneNode* Handle = new SpriteRendererNode("PaperMill","paperMill_Handle");
     sceneRoot->AddChild(Handle);
 
-    auto* RotationOrigin = new DotRendererNode("RotationOrigin", sf::Color::Blue);
+    auto* RotationOrigin = new LinearRotatorNode("RotationOrigin",120);
     Handle->AddChild(RotationOrigin);
     RotationOrigin->Move(Vector2<float>(0,3));
 

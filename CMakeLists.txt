@@ -33,6 +33,8 @@ add_executable(testSFML main.cpp
         Engine/Nodes/SceneNodes/Behaviours/BehaviourNode.h
         Engine/Nodes/SceneNodes/Behaviours/BehaviourManager.cpp
         Engine/Nodes/SceneNodes/Behaviours/BehaviourManager.h
+        Engine/Nodes/SceneNodes/Behaviours/linearMovement/LinearRotatorNode.cpp
+        Engine/Nodes/SceneNodes/Behaviours/linearMovement/LinearRotatorNode.h
 
 
 )

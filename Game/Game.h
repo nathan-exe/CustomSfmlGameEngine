@@ -8,7 +8,6 @@
 #include "../Engine/Engine.h"
 #include "../Engine/Nodes/SceneNodes/Behaviours/BehaviourManager.h"
 
-
 class Game
 {
 public :

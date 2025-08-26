@@ -4,9 +4,10 @@
         name = "handle"
         localTransform = "1,0.5,1,1,0"
         spriteName = "windmill_handle">
-    <SceneNode>
+    <LinearRotatorNode>
         name = "RotationOrigin"
         localTransform = "0,2,1,1,0"
+        degreesPerSecond = 120
         <SpriteNode
                 name = "wing"
                 localTransform = "0,0,1,1,0"
@@ -22,5 +23,5 @@
                 localTransform = "0,0,1,1,240"
                 spriteName="windmill_wing"
         />
-    </SceneNode>
+    </LinearRotatorNode>
 </SpriteNode>
