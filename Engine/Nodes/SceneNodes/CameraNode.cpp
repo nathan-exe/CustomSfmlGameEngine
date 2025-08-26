@@ -12,7 +12,12 @@ CameraNode::CameraNode(const string& name,sf::RenderTarget* RenderTarget) : Scen
 
 CameraNode* CameraNode::Current = nullptr;
 
-sf::Transform CameraNode::WorldToScreenMatrix() const
+Transform CameraNode::ScreenToWorldMatrix() const
+{
+    return WorldToScreenMatrix().getInverse();
+}
+
+Transform CameraNode::WorldToScreenMatrix() const
 {
     float heightRatioFromWorldToWindow = renderTarget->getSize().y/(worldHeight); //bien
     float AspectRatio = static_cast<float>(renderTarget->getSize().x)/static_cast<float>(renderTarget->getSize().y);

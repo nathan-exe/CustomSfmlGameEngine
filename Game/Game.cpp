@@ -5,6 +5,7 @@
 
 #include "../Engine/Nodes/SceneNodes/Behaviours/linearMovement/LinearRotatorNode.h"
 #include "../Engine/Nodes/SceneNodes/Renderers/DotRendererNode.h"
+#include "Behaviours/Camera/CameraBehaviour.h"
 Game::Game()=default;
 
 Game::~Game()
@@ -41,16 +42,23 @@ void Game::LoadScene()
         //RotationOrigin->Rotate(360.0f/3.0f);
     }
 
+    SceneNode* cameraHolder= new SceneNode("CameraHolder");
+    cameraHolder->SetWorldPosition({0,10});
+
 
     camera = new CameraNode("Camera",&Window);
-    camera->SetLocalPosition({0,10});
     camera->worldHeight = 30;
-    sceneRoot->AddChild(camera);
+
+    sceneRoot->AddChild(cameraHolder);
+    cameraHolder->AddChild(camera);
+    camera->ResetLocalTransform();
+
+
+    camera->AddChild(new CameraBehaviour("cameraBehaviour"));
 
     DotRendererNode* dot_cam = new DotRendererNode("Dot", sf::Color::Green);
     dot_cam->SetParent(camera);
     dot_cam->ResetLocalTransform();
-
 
     sceneRoot->PrintTree();
 }
@@ -83,6 +91,8 @@ void Game::init()
 void Game::run()
 {
     init();
+
+    behaviourManager.StartAllBehavioursInOrder();
 
     // run the program as long as the window is open
     sf::Clock clock = sf::Clock();

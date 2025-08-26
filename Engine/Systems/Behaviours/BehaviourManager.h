@@ -4,7 +4,7 @@
 
 #ifndef TESTSFML_BEHAVIOURMANAGER_H
 #define TESTSFML_BEHAVIOURMANAGER_H
-#include "BehaviourNode.h"
+#include "../../Nodes/SceneNodes/Behaviours/BehaviourNode.h"
 
 
 class BehaviourManager
@@ -14,6 +14,7 @@ public:
     ~BehaviourManager();
     static BehaviourManager* Instance;
 
+    void StartAllBehavioursInOrder();
     void UpdateAllBehavioursInOrder(float deltatime) const;
     void PrintAllBehavioursInOrder() const;
 

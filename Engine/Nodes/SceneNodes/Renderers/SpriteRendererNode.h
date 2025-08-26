@@ -8,7 +8,7 @@
 #include <string>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "../CameraNode.h"
-#include "../../../Rendering/SpriteManager.h"
+#include "../../../Systems/Rendering/SpriteManager.h"
 
 class SpriteRendererNode : public RendererNode
 {

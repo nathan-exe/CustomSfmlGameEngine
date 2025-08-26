@@ -5,8 +5,8 @@
 #ifndef TESTSFML_RENDERERMANAGER_H
 #define TESTSFML_RENDERERMANAGER_H
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "../Nodes/SceneNodes/Renderers/RendererNode.h"
-#include "../Nodes/SceneNodes/CameraNode.h"
+#include "../../Nodes/SceneNodes/Renderers/RendererNode.h"
+#include "../../Nodes/SceneNodes/CameraNode.h"
 
 
 class RendererManager

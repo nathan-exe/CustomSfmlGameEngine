@@ -4,7 +4,7 @@
 
 #include "BehaviourNode.h"
 
-#include "BehaviourManager.h"
+#include "../../../Systems/Behaviours/BehaviourManager.h"
 
 BehaviourNode::BehaviourNode(string name) : SceneNode(name)
 {

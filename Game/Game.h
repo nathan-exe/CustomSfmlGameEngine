@@ -6,7 +6,7 @@
 #define TESTSFML_GAME_H
 
 #include "../Engine/Engine.h"
-#include "../Engine/Nodes/SceneNodes/Behaviours/BehaviourManager.h"
+#include "../Engine/Systems/Behaviours/BehaviourManager.h"
 
 class Game
 {

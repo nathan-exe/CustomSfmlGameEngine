@@ -4,38 +4,41 @@ project(testSFML)
 set(CMAKE_CXX_STANDARD 26)
 find_package(SFML COMPONENTS Network Graphics Window Audio System CONFIG REQUIRED)
 
-add_executable(testSFML main.cpp
+add_executable(
+        testSFML main.cpp
         Engine/Engine.h
         Engine/Nodes/Node.cpp
         Engine/Nodes/Node.h
         Engine/Nodes/SceneNodes/SceneNode.cpp
         Engine/Nodes/SceneNodes/SceneNode.h
-        Engine/Rendering/SpriteManager.cpp
-        Engine/Rendering/SpriteManager.h
+        Engine/Systems/Rendering/SpriteManager.cpp
+        Engine/Systems/Rendering/SpriteManager.h
         Game/Game.cpp
         Game/Game.h
         Engine/Nodes/SceneNodes/Renderers/RendererNode.cpp
         Engine/Nodes/SceneNodes/Renderers/RendererNode.h
         Engine/Nodes/SceneNodes/Renderers/SpriteRendererNode.cpp
         Engine/Nodes/SceneNodes/Renderers/SpriteRendererNode.h
-        Engine/Rendering/RendererManager.cpp
-        Engine/Rendering/RendererManager.h
-        Engine/Rendering/Rendering.h
+        Engine/Systems/Rendering/RendererManager.cpp
+        Engine/Systems/Rendering/RendererManager.h
+        Engine/Systems/Rendering/Rendering.h
         Engine/Nodes/AllNodes.h
         Engine/Nodes/SceneNodes/CameraNode.cpp
         Engine/Nodes/SceneNodes/CameraNode.h
-        Engine/Dependencies.h
         Engine/Utils/DataSerializer.cpp
         Engine/Utils/DataSerializer.h
         Engine/Nodes/SceneNodes/Renderers/DotRendererNode.cpp
         Engine/Nodes/SceneNodes/Renderers/DotRendererNode.h
         Engine/Nodes/SceneNodes/Behaviours/BehaviourNode.cpp
         Engine/Nodes/SceneNodes/Behaviours/BehaviourNode.h
-        Engine/Nodes/SceneNodes/Behaviours/BehaviourManager.cpp
-        Engine/Nodes/SceneNodes/Behaviours/BehaviourManager.h
+        Engine/Systems/Behaviours/BehaviourManager.cpp
+        Engine/Systems/Behaviours/BehaviourManager.h
         Engine/Nodes/SceneNodes/Behaviours/linearMovement/LinearRotatorNode.cpp
         Engine/Nodes/SceneNodes/Behaviours/linearMovement/LinearRotatorNode.h
-
-
+        Game/Behaviours/Camera/CameraBehaviour.cpp
+        Game/Behaviours/Camera/CameraBehaviour.h
+        Engine/Utils/Math.cpp
+        Engine/Utils/Math.h
+        Engine/Utils/Utils.h
 )
 target_link_libraries(testSFML PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)

@@ -3,7 +3,7 @@
 //
 
 #include "RendererNode.h"
-#include "../../../../Engine/Rendering/RendererManager.h"
+#include "../../../../Engine/Systems/Rendering/RendererManager.h"
 
 RendererNode::RendererNode(const std::string& name) : SceneNode(name)
 {

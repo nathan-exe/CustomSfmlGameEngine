@@ -2,6 +2,7 @@
 // Created by Nathan on 26/08/2025.
 //
 
+
 #include "BehaviourManager.h"
 
 BehaviourManager* BehaviourManager::Instance = nullptr;
@@ -17,10 +18,24 @@ BehaviourManager::~BehaviourManager()
     Instance = nullptr;
 }
 
+void BehaviourManager::StartAllBehavioursInOrder()
+{
+    for (BehaviourNode* behaviour : behaviours)
+    {
+        behaviour->hasBeenStarted = true;
+        behaviour->Start();
+    }
+}
+
 void BehaviourManager::UpdateAllBehavioursInOrder(float deltatime) const
 {
     for (BehaviourNode* behaviour : behaviours)
     {
+        if (!behaviour->hasBeenStarted)
+        {
+            behaviour->hasBeenStarted = true;
+            behaviour->Start();
+        }
         behaviour->Update(deltatime);
     }
 }

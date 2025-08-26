@@ -6,8 +6,8 @@
 #define TESTSFML_ENGINE_H
 
 
-//#include "Dependencies.h"
-#include "Rendering/Rendering.h"
+#include "Utils/Utils.h"
+#include "Systems/Rendering/Rendering.h"
 #include "Nodes/AllNodes.h"
 
 using std::cout, std::string, std::endl,std::optional;
