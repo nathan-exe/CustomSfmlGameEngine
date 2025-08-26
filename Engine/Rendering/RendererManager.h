@@ -21,7 +21,7 @@ public:
 
     void RegisterRenderer(RendererNode* renderer);
     void UnregisterRenderer(RendererNode* renderer);
-    void UpdateRendererLayer(RendererNode* renderer);
+    void ChangeRendererLayer(RendererNode* renderer);
 
 private:
     std::vector<RendererNode*> renderers;

@@ -16,22 +16,17 @@ void Game::LoadScene()
 {
     //scene hierarchy
     sceneRoot = new SceneNode("SceneRoot");
-    //SceneNode* player = new SceneNode("Player");
 
     SceneNode* Handle = new SpriteRendererNode("PaperMill","paperMill_Handle");
     sceneRoot->AddChild(Handle);
 
-    DotRendererNode* RotationOrigin = new DotRendererNode("RotationOrigin", sf::Color::Blue);
+    auto* RotationOrigin = new DotRendererNode("RotationOrigin", sf::Color::Blue);
     Handle->AddChild(RotationOrigin);
     RotationOrigin->Move(Vector2<float>(0,3));
 
-
-
-    DotRendererNode* dot = new DotRendererNode("Dot", sf::Color::Red);
+    auto dot = new DotRendererNode("Dot", sf::Color::Red);
     dot->SetParent(Handle);
     dot->ResetLocalTransform();
-
-
 
     //for
     int c = 3;
@@ -40,6 +35,7 @@ void Game::LoadScene()
         SceneNode* wing = new SpriteRendererNode("wing","paperMill_Wing");
         RotationOrigin->AddChild(wing);
         wing->ResetLocalTransform();
+        wing->Scale({.85f,.85f});
         wing->Rotate(sf::degrees( 360.0f/(float)c*i));
         //RotationOrigin->Rotate(360.0f/3.0f);
     }
@@ -58,6 +54,15 @@ void Game::LoadScene()
     sceneRoot->PrintTree();
 }
 
+void Game::LoadAllGameSprites()
+{
+    spriteManager.LoadAllTexturesInDirectory("Shared");
+    spriteManager.CreateSprite("test","tileset_enviro.png",sf::IntRect({0,0},{12,12}));
+    spriteManager.CreateSprite("player","tileset_enviro.png",sf::IntRect({0,0},{12,12}));
+    spriteManager.CreateSprite("paperMill_Handle","testScan.png",sf::IntRect({50,50},{100,200}),{50,20});
+    spriteManager.CreateSprite("paperMill_Wing","testScan.png",sf::IntRect({200,150},{50,100}),{25,0});
+}
+
 void Game::init()
 {
     //window creation
@@ -69,17 +74,9 @@ void Game::init()
 
     Window.setVerticalSyncEnabled(true);
 
-    //load sprites and textures
-    spriteManager.LoadAllTexturesInDirectory("Shared");
-    spriteManager.CreateSprite("test","tileset_enviro.png",sf::IntRect({0,0},{12,12}));
-    spriteManager.CreateSprite("player","tileset_enviro.png",sf::IntRect({0,0},{12,12}));
-    spriteManager.CreateSprite("paperMill_Handle","testScan.png",sf::IntRect({50,50},{100,200}),{50,20});
-    spriteManager.CreateSprite("paperMill_Wing","testScan.png",sf::IntRect({200,150},{50,100}),{25,0});
-
-
+    LoadAllGameSprites();
     LoadScene();
 
-    //rendererManager.PrintAllRenderersInOrder();
 }
 
 void Game::run()
@@ -87,14 +84,17 @@ void Game::run()
     init();
 
     // run the program as long as the window is open
-    clock = sf::Clock();
+    sf::Clock clock = sf::Clock();
+    float deltaTime = 1.0f/60.0f;
     while (Window.isOpen())
     {
         try
         {
             HandleWindowEvents();
+            behaviourManager.UpdateAllBehavioursInOrder(deltaTime);
             DrawGame();
-        }catch (sf::Exception e)
+        }
+        catch (sf::Exception e)
         {
             std::cerr<<e.what()<<std::endl;
         }
@@ -152,7 +152,6 @@ void Game::DrawGame()
 
     try
     {
-        static_cast<SceneNode*>(sceneRoot->FindChildAtPath("PaperMill/RotationOrigin"))->Rotate(sf::degrees(120*deltaTime).wrapSigned());//temp
         RendererManager::Instance->DrawAllRenderersInOrder(*CameraNode::Current);
     }
     catch (sf::Exception e)

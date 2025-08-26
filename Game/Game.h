@@ -6,6 +6,7 @@
 #define TESTSFML_GAME_H
 
 #include "../Engine/Engine.h"
+#include "../Engine/Nodes/SceneNodes/Behaviours/BehaviourManager.h"
 
 
 class Game
@@ -19,16 +20,17 @@ public :
 private:
   void HandleWindowEvents();
   void DrawGame();
+
   void LoadScene();
+  void LoadAllGameSprites();
 
 private :
   sf::RenderWindow Window;
   SpriteManager spriteManager;
   RendererManager rendererManager;
+  BehaviourManager behaviourManager;
   SceneNode* sceneRoot = nullptr;
   CameraNode* camera = nullptr;
-  sf::Clock clock;
-  float deltaTime;
 };
 
 

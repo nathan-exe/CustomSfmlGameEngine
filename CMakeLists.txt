@@ -29,6 +29,10 @@ add_executable(testSFML main.cpp
         Engine/Utils/DataSerializer.h
         Engine/Nodes/SceneNodes/Renderers/DotRendererNode.cpp
         Engine/Nodes/SceneNodes/Renderers/DotRendererNode.h
+        Engine/Nodes/SceneNodes/Behaviours/BehaviourNode.cpp
+        Engine/Nodes/SceneNodes/Behaviours/BehaviourNode.h
+        Engine/Nodes/SceneNodes/Behaviours/BehaviourManager.cpp
+        Engine/Nodes/SceneNodes/Behaviours/BehaviourManager.h
 
 
 )
