@@ -3,7 +3,7 @@ project(testSFML)
 
 set(CMAKE_CXX_STANDARD 26)
 find_package(SFML COMPONENTS Network Graphics Window Audio System CONFIG REQUIRED)
-
+#-DSFML_DIR:PATH=C:\Users\Megaport\.vcpkg-clion\vcpkg\packages\sfml_x86-mingw-dynamic\share\sfml
 add_executable(
         testSFML main.cpp
         Engine/Engine.h
@@ -40,5 +40,11 @@ add_executable(
         Engine/Utils/Math.cpp
         Engine/Utils/Math.h
         Engine/Utils/Utils.h
+        Engine/Nodes/NodeSerialization/SceneLoader.cpp
+        Engine/Nodes/NodeSerialization/SceneLoader.h
+        Engine/Nodes/NodeSerialization/ISerializable.h
+        Engine/Libs/rapidxml/rapidxml_utils.hpp
+        Engine/Libs/rapidxml/rapidxml_print.hpp
+        Engine/Libs/rapidxml/rapidxml_iterators.hpp
 )
 target_link_libraries(testSFML PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)

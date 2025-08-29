@@ -3,6 +3,7 @@
 //
 #include "Game.h"
 
+#include "../Engine/Nodes/NodeSerialization/SceneLoader.h"
 #include "../Engine/Nodes/SceneNodes/Behaviours/linearMovement/LinearRotatorNode.h"
 #include "../Engine/Nodes/SceneNodes/Renderers/DotRendererNode.h"
 #include "Behaviours/Camera/CameraBehaviour.h"
@@ -61,6 +62,9 @@ void Game::LoadScene()
     dot_cam->ResetLocalTransform();
 
     sceneRoot->PrintTree();
+
+    SceneLoader sceneLoader = SceneLoader();
+    sceneLoader.LoadScene("WindMill.xml");
 }
 
 void Game::LoadAllGameSprites()

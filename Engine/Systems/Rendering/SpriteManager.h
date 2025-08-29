@@ -12,6 +12,7 @@
 #include<filesystem>
 #include <iostream>
 #include <ranges>
+#include <vector>
 #include <SFML/System/Exception.hpp>
 using namespace std::filesystem;
 using std::cout,std::cerr,std::endl;

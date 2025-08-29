@@ -4,7 +4,6 @@
 
 #ifndef TESTSFML_DATASERIALIZER_H
 #define TESTSFML_DATASERIALIZER_H
-#include <cvt/wstring>
 #include <SFML/Graphics.hpp>
 #include <string>
 
