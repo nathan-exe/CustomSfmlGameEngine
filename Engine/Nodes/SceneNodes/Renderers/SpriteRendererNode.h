@@ -16,8 +16,10 @@ public :
     SpriteRendererNode(const std::string& name,const std::string& SpriteName);
     void Draw(CameraNode& Camera) override;
 
+    bool LoadXmlAttribute(string key, string value) override;
+
 private :
-    string spriteName;
+    string _spriteName;
 };
 
 

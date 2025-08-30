@@ -11,8 +11,9 @@ class DotRendererNode : public RendererNode
 {
 public:
     DotRendererNode(const std::string& name,sf::Color color);
-
     void Draw(CameraNode& Camera) override;
+
+    bool LoadXmlAttribute(string key, string value) override;
 
 private:
     sf::Color color;

@@ -25,4 +25,19 @@ void DotRendererNode::Draw(CameraNode& Camera)
 #endif
 }
 
+bool DotRendererNode::LoadXmlAttribute(string key, string value)
+{
+    bool result = RendererNode::LoadXmlAttribute(key, value);
+    if (!result)
+    {
+        if ((result = 0==key.compare("color")))
+        {
+            color = StringConversions::ColorFromString(value);
+        }
+    }
+    return result ;
+}
+
+
+
 

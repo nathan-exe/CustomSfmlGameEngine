@@ -15,8 +15,9 @@ public :
     virtual void Update(float deltatime) = 0;
     virtual void Start() = 0;
 
+    bool LoadXmlAttribute(string key, string value) override;
+
     bool hasBeenStarted = false;
-public:
     int ExecutionOrder;
 };
 

@@ -30,7 +30,8 @@ void RendererManager::PrintAllRenderersInOrder() const
 {
     cout<<"Sprite Renderers : \n";
     for (const RendererNode* renderer : renderers)
-        cout<<"node "<<renderer->GetPath() <<" (layer : "<<renderer->layer<<").\n";
+        cout<<"node "<<renderer->GetPath()
+    <<" (layer : "<<renderer->Layer<<",local transform : \n"<< StringConversions::TransformToString(renderer->GetLocalTransform()) <<").\n";
     cout.flush();
 }
 
@@ -42,7 +43,7 @@ void RendererManager::RegisterRenderer(RendererNode* renderer)
                 renderer,
                 [](const RendererNode* a, const RendererNode* b)
                 {
-                    return a->layer>b->layer;
+                    return a->Layer>b->Layer;
                 })
             ,renderer);
 }

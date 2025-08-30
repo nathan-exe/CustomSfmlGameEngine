@@ -17,3 +17,16 @@ void LinearRotatorNode::Update(float deltatime)
 void LinearRotatorNode::Start()
 {
 }
+
+bool LinearRotatorNode::LoadXmlAttribute(string key, string value)
+{
+    bool result = BehaviourNode::LoadXmlAttribute(key, value);
+    if (!result)
+    {
+        if ((result = 0 == key.compare("degreesPerSecond")))
+        {
+            DegreesPerSecond = StringConversions::FloatFromString(value);
+        }
+    }
+    return result ;
+}

@@ -5,5 +5,5 @@
 #ifndef TESTSFML_UTILS_H
 #define TESTSFML_UTILS_H
 #include "Math.h"
-#include "DataSerializer.h"
+#include "StringConversions.h"
 #endif //TESTSFML_UTILS_H

@@ -9,7 +9,7 @@
 #include <SFML/Graphics/Transform.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/System/Angle.hpp>
-#include "../../Utils/DataSerializer.h"
+#include "../../Utils/StringConversions.h"
 #include "../Node.h"
 
 using sf::Vector2,sf::Angle,sf::Vector2f,sf::Transform;
@@ -19,6 +19,8 @@ class SceneNode : public Node
 public:
     SceneNode(const string& name);
 
+    //transformations
+    [[nodiscard]] Transform GetLocalTransform() const;
     [[nodiscard]] Transform GetWorldTransform() const;
     [[nodiscard]] Transform GetWorldToLocalTransform() const;
     void ResetLocalTransform();
@@ -40,13 +42,13 @@ public:
 
     void SetWorldPosition(const Vector2f& newPosition);
     void SetWorldAngle(const Angle& angle);
-
+//xml
+    virtual bool LoadXmlAttribute(string key, string value);
 
 private :
-    Angle localAngle = sf::degrees(0);
-    Vector2f localPosition = {0,0};
-    Vector2f localScale = {1,1};
-
+    Angle _localAngle = sf::degrees(0);
+    Vector2f _localPosition = {0,0};
+    Vector2f _localScale = {1,1};
 
 };
 

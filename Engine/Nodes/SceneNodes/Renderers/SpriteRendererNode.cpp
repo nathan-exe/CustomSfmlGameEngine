@@ -7,12 +7,12 @@
 SpriteRendererNode::SpriteRendererNode(const std::string& name, const std::string& SpriteName) : RendererNode(name)
 {
     cout<<"constructor SpriteRenderer. sprintename : "<<SpriteName<<endl;
-    spriteName = SpriteName;
+    _spriteName = SpriteName;
 }
 
 void SpriteRendererNode::Draw(CameraNode& Camera)
 {
-    sf::Sprite sprite = SpriteManager::Instance->GetSprite(spriteName);
+    sf::Sprite sprite = SpriteManager::Instance->GetSprite(_spriteName);
 
     sf::Transform texelToLocal = sf::Transform::Identity;
     float invPixelsPerUnits = 1.0f/Camera.PixelsPerUnit;//suggestion : sauvegarder ça dans la cam direct
@@ -26,4 +26,17 @@ void SpriteRendererNode::Draw(CameraNode& Camera)
     //cout<<"screen transform : \n"<<DataSerializer::TransformToString(localToScreen);
 
     Camera.renderTarget->draw(sprite,localToScreen);
+}
+
+bool SpriteRendererNode::LoadXmlAttribute(string key, string value)
+{
+    bool result = RendererNode::LoadXmlAttribute(key, value);
+    if (!result)
+    {
+        if ((result = 0==key.compare("spriteName")))
+        {
+            _spriteName = value;
+        }
+    }
+    return result ;
 }

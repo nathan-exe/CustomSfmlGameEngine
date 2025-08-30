@@ -40,12 +40,6 @@ public :
 private :
     std::unordered_map<string,sf::Texture> m_textures;
     std::unordered_map<string,sf::Sprite> m_sprites;
-
-    //todo : tester de créer le sprite manager,
-    //charger les textures, sauvegarder un pointer vers une texture
-    //ou un sprite et détruire le spriteManager pour voir si la desallocation
-    //se fait bien automatiquement
 };
-
 
 #endif //TESTSFML_SPRITEMANAGER_H

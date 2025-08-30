@@ -25,8 +25,8 @@ add_executable(
         Engine/Nodes/AllNodes.h
         Engine/Nodes/SceneNodes/CameraNode.cpp
         Engine/Nodes/SceneNodes/CameraNode.h
-        Engine/Utils/DataSerializer.cpp
-        Engine/Utils/DataSerializer.h
+        Engine/Utils/StringConversions.cpp
+        Engine/Utils/StringConversions.h
         Engine/Nodes/SceneNodes/Renderers/DotRendererNode.cpp
         Engine/Nodes/SceneNodes/Renderers/DotRendererNode.h
         Engine/Nodes/SceneNodes/Behaviours/BehaviourNode.cpp

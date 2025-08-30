@@ -14,3 +14,18 @@ RendererNode::~RendererNode()
 {
     RendererManager::Instance->UnregisterRenderer(this);
 }
+
+bool RendererNode::LoadXmlAttribute(string key, string value)
+{
+    bool result = SceneNode::LoadXmlAttribute(key, value);
+    if (!result)
+    {
+        if ((result = 0==key.compare("layer")))
+        {
+            Layer = StringConversions::IntFromString(value);
+        }
+    }
+    return result ;
+}
+
+

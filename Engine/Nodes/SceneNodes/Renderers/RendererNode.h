@@ -18,8 +18,9 @@ public:
     ~RendererNode();
     virtual void Draw(CameraNode& Camera) = 0;
 
-public:
-    int layer = 0;
+    bool LoadXmlAttribute(string key, string value) override;
+
+    int Layer = 0;
 };
 
 

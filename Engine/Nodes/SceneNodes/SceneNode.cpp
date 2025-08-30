@@ -12,12 +12,18 @@ SceneNode::SceneNode(const string& name) : Node(name)
 
 }
 
-sf::Transform SceneNode::GetWorldTransform() const
+sf::Transform SceneNode::GetLocalTransform() const
 {
     sf::Transform localTransform = sf::Transform::Identity;
-    localTransform.scale(localScale);
-    localTransform.translate(localPosition);
-    localTransform.rotate(localAngle);
+    localTransform.scale(_localScale);
+    localTransform.translate(_localPosition);
+    localTransform.rotate(_localAngle);
+    return localTransform;
+}
+
+sf::Transform SceneNode::GetWorldTransform() const
+{
+    sf::Transform localTransform = GetLocalTransform();
 
     //cout<<"local transform : \n"<<DataSerializer::TransformToString(localTransform)<<endl;
 
@@ -32,76 +38,100 @@ sf::Transform SceneNode::GetWorldToLocalTransform() const
 
 void SceneNode::ResetLocalTransform()
 {
-    localAngle = Angle::Zero;
-    localPosition = {0,0};
-    localScale = {1,1};
+    _localAngle = Angle::Zero;
+    _localPosition = {0,0};
+    _localScale = {1,1};
 }
 
 
 void SceneNode::Rotate(const Angle& angle)
 {
-    localAngle += angle;
+    _localAngle += angle;
 }
 
 void SceneNode::Scale(const sf::Vector2f& scale)
 {
-    localScale.x *= scale.x;
-    localScale.y *= scale.y;
+    _localScale.x *= scale.x;
+    _localScale.y *= scale.y;
 }
 
 Vector2f SceneNode::GetLocalPosition() const
 {
-    return localPosition;
+    return _localPosition;
 }
 
 Vector2f SceneNode::GetLocalScale() const
 {
-    return localScale;
+    return _localScale;
 }
 
 Angle SceneNode::GetLocalAngle() const
 {
-    return localAngle;
+    return _localAngle;
 }
 
 Vector2f SceneNode::GetWorldPosition() const
 {
     Transform localToWorld = GetWorldTransform();
-    return localToWorld * localPosition;
+    return localToWorld * _localPosition;
 }
 
 Angle SceneNode::GetWorldAngle() const
 {
-    if (Parent==nullptr) return localAngle;
-    return static_cast<SceneNode*>(Parent)->GetWorldAngle() + localAngle;
+    if (Parent==nullptr) return _localAngle;
+    return static_cast<SceneNode*>(Parent)->GetWorldAngle() + _localAngle;
 }
 
 void SceneNode::SetLocalPosition(const Vector2f& newPosition)
 {
-    localPosition = newPosition;
+    _localPosition = newPosition;
 }
 
 void SceneNode::SetLocalScale(const Vector2f& newScale)
 {
-    localScale = newScale;
+    _localScale = newScale;
 }
 
 void SceneNode::SetLocalAngle(const Angle& angle)
 {
-    localAngle = angle;
+    _localAngle = angle;
 }
 
 void SceneNode::SetWorldPosition(const Vector2f& newPosition)
 {
     Transform worldToLocal = GetWorldToLocalTransform();
-    localPosition = worldToLocal.transformPoint(newPosition);//pas sur que ça marche
+    _localPosition = worldToLocal.transformPoint(newPosition);//pas sur que ça marche
 }
 
 void SceneNode::SetWorldAngle(const Angle& angle)
 {
     Angle currentWorldAngle = GetWorldAngle();
     Angle Offset = angle - currentWorldAngle;
-    localAngle += Offset;//pas sur que ça marche
+    _localAngle += Offset;//pas sur que ça marche
+}
+
+bool SceneNode::LoadXmlAttribute(string key, string value)
+{
+    bool success = false;
+    if ((success = 0 == key.compare("name")))
+    {
+        Name = value;
+        cout<<Name;
+    }
+    else if ((success = 0 == key.compare("localTransform")))
+    {
+        char* characters = const_cast<char*>(value.c_str());
+        char del = ',';
+
+        _localPosition.x = StringConversions::FloatFromString(strtok(characters,&del));
+        _localPosition.y = StringConversions::FloatFromString(strtok(NULL,&del));
+        _localScale.x = StringConversions::FloatFromString(strtok(NULL,&del));
+        _localScale.y = StringConversions::FloatFromString(strtok(NULL,&del));
+        _localAngle = StringConversions::AngleFromString(strtok(NULL,&del));
+        cout<<"local position : "<<_localPosition.x<<" "<<_localPosition.y<<endl;
+        cout<<"local scale : "<<_localScale.x<<" "<<_localScale.y<<endl;
+    }
+    return success;
 }
 
 

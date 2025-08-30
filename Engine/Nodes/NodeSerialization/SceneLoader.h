@@ -10,10 +10,12 @@ using namespace rapidxml;
 
 class SceneLoader
 {
-    public:
-    void LoadNode(xml_node<>* node);
+public:
+    [[nodiscard]] SceneNode* InstantiateEmptyNode(std::string type);
+    [[nodiscard]] SceneNode* LoadNode(xml_node<>* xmlNode);
+
 ///relative file path from Ressources/Scenes
-    SceneNode* LoadScene(const path filepath);
+    [[nodiscard]] SceneNode* LoadScene(const path filepath);
 };
 
 

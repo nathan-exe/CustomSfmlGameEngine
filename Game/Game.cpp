@@ -19,7 +19,7 @@ void Game::LoadScene()
 {
     //scene hierarchy
     sceneRoot = new SceneNode("SceneRoot");
-
+/*
     SceneNode* Handle = new SpriteRendererNode("PaperMill","paperMill_Handle");
     sceneRoot->AddChild(Handle);
 
@@ -40,12 +40,14 @@ void Game::LoadScene()
         wing->ResetLocalTransform();
         wing->Scale({.85f,.85f});
         wing->Rotate(sf::degrees( 360.0f/(float)c*i));
-        //RotationOrigin->Rotate(360.0f/3.0f);
     }
+
+*/
+    SceneLoader sceneLoader = SceneLoader();
+    sceneRoot->AddChild(sceneLoader.LoadScene("WindMill.xml"));
 
     SceneNode* cameraHolder= new SceneNode("CameraHolder");
     cameraHolder->SetWorldPosition({0,10});
-
 
     camera = new CameraNode("Camera",&Window);
     camera->worldHeight = 30;
@@ -61,10 +63,13 @@ void Game::LoadScene()
     dot_cam->SetParent(camera);
     dot_cam->ResetLocalTransform();
 
+    //---
+
+    CameraNode::Current->renderTarget = &Window;
+    cout<<"====\n";
     sceneRoot->PrintTree();
 
-    SceneLoader sceneLoader = SceneLoader();
-    sceneLoader.LoadScene("WindMill.xml");
+
 }
 
 void Game::LoadAllGameSprites()
@@ -89,6 +94,9 @@ void Game::init()
 
     LoadAllGameSprites();
     LoadScene();
+
+    RendererManager::Instance->PrintAllRenderersInOrder();
+
 
 }
 

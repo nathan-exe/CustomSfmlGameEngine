@@ -20,8 +20,10 @@ public :
     [[nodiscard]] Transform WorldToScreenMatrix() const;
     [[nodiscard]] Transform ScreenToWorldMatrix() const;
 
+    bool LoadXmlAttribute(string key, string value) override;
+
     float worldHeight = 0;
-    const int PixelsPerUnit = 50;
+    int PixelsPerUnit = 50;
 
 public :
     sf::RenderTarget* renderTarget = nullptr;

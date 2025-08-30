@@ -13,8 +13,8 @@ public:
     LinearRotatorNode(string Name,float AngularSpeedDegreesPerSecond);
     void Update(float deltatime) override;
     void Start() override;
+    bool LoadXmlAttribute(string key, string value) override;
 
-public:
     float DegreesPerSecond;
 };
 

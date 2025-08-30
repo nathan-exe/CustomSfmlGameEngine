@@ -35,3 +35,18 @@ Transform CameraNode::WorldToScreenMatrix() const
 
     return matrix;
 }
+
+
+bool CameraNode::LoadXmlAttribute(string key, string value)
+{
+    bool result = SceneNode::LoadXmlAttribute(key, value);
+    if (!result)
+    {
+        if ((result = 0 == key.compare("worldHeight")))
+            worldHeight = StringConversions::FloatFromString(value);
+        else if ((result = 0 == key.compare("pixelsPerUnit")))
+            PixelsPerUnit = StringConversions::IntFromString(value);
+
+    }
+    return result ;
+}
