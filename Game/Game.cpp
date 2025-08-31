@@ -6,7 +6,7 @@
 #include "../Engine/Nodes/NodeSerialization/SceneLoader.h"
 #include "../Engine/Nodes/SceneNodes/Behaviours/linearMovement/LinearRotatorNode.h"
 #include "../Engine/Nodes/SceneNodes/Renderers/DotRendererNode.h"
-#include "Behaviours/Camera/CameraBehaviour.h"
+#include "Behaviours/Camera/CameraBehaviourNode.h"
 Game::Game()=default;
 
 Game::~Game()
@@ -17,59 +17,12 @@ Game::~Game()
 
 void Game::LoadScene()
 {
-    //scene hierarchy
-    sceneRoot = new SceneNode("SceneRoot");
-/*
-    SceneNode* Handle = new SpriteRendererNode("PaperMill","paperMill_Handle");
-    sceneRoot->AddChild(Handle);
-
-    auto* RotationOrigin = new LinearRotatorNode("RotationOrigin",120);
-    Handle->AddChild(RotationOrigin);
-    RotationOrigin->Move(Vector2<float>(0,3));
-
-    auto dot = new DotRendererNode("Dot", sf::Color::Red);
-    dot->SetParent(Handle);
-    dot->ResetLocalTransform();
-
-    //for
-    int c = 3;
-    for (int i =0;i<c;i++)
-    {
-        SceneNode* wing = new SpriteRendererNode("wing","paperMill_Wing");
-        RotationOrigin->AddChild(wing);
-        wing->ResetLocalTransform();
-        wing->Scale({.85f,.85f});
-        wing->Rotate(sf::degrees( 360.0f/(float)c*i));
-    }
-
-*/
     SceneLoader sceneLoader = SceneLoader();
-    sceneRoot->AddChild(sceneLoader.LoadScene("WindMill.xml"));
-
-    SceneNode* cameraHolder= new SceneNode("CameraHolder");
-    cameraHolder->SetWorldPosition({0,10});
-
-    camera = new CameraNode("Camera",&Window);
-    camera->worldHeight = 30;
-
-    sceneRoot->AddChild(cameraHolder);
-    cameraHolder->AddChild(camera);
-    camera->ResetLocalTransform();
-
-
-    camera->AddChild(new CameraBehaviour("cameraBehaviour"));
-
-    DotRendererNode* dot_cam = new DotRendererNode("Dot", sf::Color::Green);
-    dot_cam->SetParent(camera);
-    dot_cam->ResetLocalTransform();
-
-    //---
+    sceneRoot=sceneLoader.LoadScene("MainScene.xml");
 
     CameraNode::Current->renderTarget = &Window;
     cout<<"====\n";
     sceneRoot->PrintTree();
-
-
 }
 
 void Game::LoadAllGameSprites()
@@ -89,14 +42,12 @@ void Game::init()
         "My window",
         sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar,
         sf::State::Windowed);
-
     Window.setVerticalSyncEnabled(true);
 
     LoadAllGameSprites();
     LoadScene();
 
-    RendererManager::Instance->PrintAllRenderersInOrder();
-
+    //RendererManager::Instance->PrintAllRenderersInOrder();
 
 }
 

@@ -31,7 +31,7 @@ void RendererManager::PrintAllRenderersInOrder() const
     cout<<"Sprite Renderers : \n";
     for (const RendererNode* renderer : renderers)
         cout<<"node "<<renderer->GetPath()
-    <<" (layer : "<<renderer->Layer<<",local transform : \n"<< StringConversions::TransformToString(renderer->GetLocalTransform()) <<").\n";
+    <<" (layer : "<<renderer->Layer<<").\n";
     cout.flush();
 }
 

@@ -6,6 +6,7 @@
 
 #include <fstream>
 
+#include "../../../Game/Behaviours/Camera/CameraBehaviourNode.h"
 #include "../SceneNodes/Behaviours/BehaviourNode.h"
 #include "../SceneNodes/Behaviours/linearMovement/LinearRotatorNode.h"
 #include "../SceneNodes/Renderers/DotRendererNode.h"
@@ -45,44 +46,64 @@
 {
     //c'est terrifiant mais je sais pas comment faire autrement
 
+    //engine nodes
     const string defaultName = "newNode";
-    if (0==type.compare("SpriteRendererNode"))
+    if (0 == type.compare("SpriteRendererNode"))
         return new SpriteRendererNode(defaultName,"");
-    if (0==type.compare("DotRendererNode"))
+    if (0 == type.compare("DotRendererNode"))
         return new DotRendererNode(defaultName,sf::Color::Black);
-    if (0==type.compare("SceneNode"))
+    if (0 == type.compare("SceneNode"))
         return new SceneNode(defaultName);
-    if (0==type.compare("LinearRotatorNode"))
+    if (0 == type.compare("LinearRotatorNode"))
         return new LinearRotatorNode(defaultName,0);
-    if (0==type.compare("CameraNode"))
+    if (0 == type.compare("CameraNode"))
         return new CameraNode(defaultName,nullptr);
 
-    throw sf::Exception("unknown node type fond in xml file : "+std::string(type));
+    //game nodes
+    if (0 == type.compare("CameraBehaviourNode"))
+        return new CameraBehaviourNode(defaultName);
+
+    throw sf::Exception("unknown node type fond in xml file : "+type);
 
 }
+
+
 
 [[nodiscard]] SceneNode* SceneLoader::LoadNode(xml_node<>* xmlNode)
 {
     cout << "loading node : " << xmlNode->name() << endl;
 
-    //instantiate new node
-    SceneNode* sceneNode;
-    sceneNode = InstantiateEmptyNode(xmlNode->name());
-
-    //load node attributes
-    for (xml_attribute<> *attr = xmlNode->first_attribute();
-         attr!=nullptr; attr = attr->next_attribute())
+    if (std::string(xmlNode->name()).compare("__SceneInstance")==0)//scene Instances
     {
-        cout<<attr->name()<<" : "<<attr->value();
-        bool success = sceneNode->LoadXmlAttribute(attr->name(),attr->value());
-        if (!success) cerr<<"unknown attribute : "<<attr->name()<<endl;
+        return LoadScene(xmlNode->first_attribute("path")->value());
+    }
+    else //normal Nodes
+    {
+        //instantiate new node
+        SceneNode* sceneNode;
+        sceneNode = InstantiateEmptyNode(xmlNode->name());
+
+        //load node attributes
+        for (xml_attribute<> *attr = xmlNode->first_attribute();
+             attr!=nullptr; attr = attr->next_attribute())
+        {
+            cout<<attr->name()<<" : "<<attr->value();
+            bool success = sceneNode->LoadXmlAttribute(attr->name(),attr->value());
+            if (!success) cerr<<"unknown attribute : "<<attr->name()<<endl;
+        }
+
+        //Load children
+        for (xml_node<>* child = xmlNode->first_node();child!=nullptr;child=child->next_sibling())
+        {
+            sceneNode->AddChild(LoadNode(child));
+        }
+
+        return sceneNode;
     }
 
-    //Load children
-    for (xml_node<>* child = xmlNode->first_node();child!=nullptr;child=child->next_sibling())
-    {
-        sceneNode->AddChild(LoadNode(child));
-    }
 
-    return sceneNode;
+
+
+
+
 }

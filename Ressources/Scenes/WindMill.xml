@@ -1,27 +1,32 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 
-<SpriteRendererNode
-        name = "PaperMill"
-        localTransform = "0,0.5,1,1,0"
-        spriteName = "paperMill_Handle">
-    <LinearRotatorNode
-        name = "LinearRotatorNode"
-        localTransform = "0,3,1,1,0"
-        degreesPerSecond = "120">
-        <SpriteRendererNode
-                name = "wing"
-                localTransform = "0,0,1,1,0"
-                spriteName="paperMill_Wing"
-        />
-        <SpriteRendererNode
-                name = "wing"
-                localTransform = "0,0,1,1,120"
-                spriteName="paperMill_Wing"
-        />
-        <SpriteRendererNode
-                name = "wing"
-                localTransform = "0,0,1,1,240"
-                spriteName="paperMill_Wing"
-        />
-    </LinearRotatorNode>
-</SpriteRendererNode>
+<SceneNode
+    name = "windmills">
+    <SpriteRendererNode
+            name = "PaperMill"
+            localTransform = "-15,0,1,1,0"
+            spriteName = "paperMill_Handle">
+        <LinearRotatorNode
+                name = "LinearRotatorNode"
+                localTransform = "0,3,1,1,0"
+                degreesPerSecond = "120">
+            <SpriteRendererNode
+                    name = "wing"
+                    localTransform = "0,0,1,1,0"
+                    spriteName="paperMill_Wing"
+            />
+            <SpriteRendererNode
+                    name = "wing"
+                    localTransform = "0,0,1,1,120"
+                    spriteName="paperMill_Wing"
+            />
+            <SpriteRendererNode
+                    name = "wing"
+                    localTransform = "0,0,1,1,240"
+                    spriteName="paperMill_Wing"
+            />
+        </LinearRotatorNode>
+    </SpriteRendererNode>
+
+</SceneNode>
+

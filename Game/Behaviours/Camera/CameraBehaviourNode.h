@@ -8,10 +8,10 @@
 #include "../../../Engine/Nodes/SceneNodes/Behaviours/BehaviourNode.h"
 
 
-class CameraBehaviour : public BehaviourNode
+class CameraBehaviourNode : public BehaviourNode
 {
 public:
-    CameraBehaviour(const string& name)
+    CameraBehaviourNode(const string& name)
         : BehaviourNode(name)
     {
     }

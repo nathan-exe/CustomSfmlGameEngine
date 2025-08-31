@@ -35,8 +35,8 @@ add_executable(
         Engine/Systems/Behaviours/BehaviourManager.h
         Engine/Nodes/SceneNodes/Behaviours/linearMovement/LinearRotatorNode.cpp
         Engine/Nodes/SceneNodes/Behaviours/linearMovement/LinearRotatorNode.h
-        Game/Behaviours/Camera/CameraBehaviour.cpp
-        Game/Behaviours/Camera/CameraBehaviour.h
+        Game/Behaviours/Camera/CameraBehaviourNode.cpp
+        Game/Behaviours/Camera/CameraBehaviourNode.h
         Engine/Utils/Math.cpp
         Engine/Utils/Math.h
         Engine/Utils/Utils.h
