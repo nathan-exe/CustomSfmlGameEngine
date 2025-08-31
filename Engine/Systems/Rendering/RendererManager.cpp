@@ -26,6 +26,14 @@ void RendererManager::DrawAllRenderersInOrder(CameraNode& camera) const
     }
 }
 
+void RendererManager::InitializeAllRenderers()
+{
+    for (RendererNode* renderer : renderers)
+    {
+        renderer->Initialize();
+    }
+}
+
 void RendererManager::PrintAllRenderersInOrder() const
 {
     cout<<"Sprite Renderers : \n";

@@ -17,6 +17,8 @@ public:
     static RendererManager* Instance;
 
     void DrawAllRenderersInOrder(CameraNode& camera) const;
+    void InitializeAllRenderers();
+
     void PrintAllRenderersInOrder() const;
 
     void RegisterRenderer(RendererNode* renderer);

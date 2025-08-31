@@ -6,7 +6,6 @@
 
 SpriteRendererNode::SpriteRendererNode(const std::string& name, const std::string& SpriteName) : RendererNode(name)
 {
-    cout<<"constructor SpriteRenderer. sprintename : "<<SpriteName<<endl;
     _spriteName = SpriteName;
 }
 

@@ -14,7 +14,7 @@
 class CameraNode : public SceneNode
 {
 public :
-    CameraNode(const std::string& name,sf::RenderTarget* RenderTarget);
+    CameraNode(const std::string& name = DEFAULT_NODE_NAME,sf::RenderTarget* RenderTarget = nullptr);
     static CameraNode* Current;
 
     [[nodiscard]] Transform WorldToScreenMatrix() const;

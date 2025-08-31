@@ -7,6 +7,7 @@
 #include <fstream>
 
 #include "../../../Game/Behaviours/Camera/CameraBehaviourNode.h"
+#include "../SceneNodes/Tilemaps/TilemapNode.h"
 #include "../SceneNodes/Behaviours/BehaviourNode.h"
 #include "../SceneNodes/Behaviours/linearMovement/LinearRotatorNode.h"
 #include "../SceneNodes/Renderers/DotRendererNode.h"
@@ -15,7 +16,7 @@
 
 [[nodiscard]] SceneNode* SceneLoader::LoadScene(const path filepath)
 {
-    path filePath =  "Ressources\\Scenes" / filepath;
+    path filePath =  "Resources\\Scenes" / filepath;
 
     //file validation
     if (!(exists(filePath) && is_regular_file(filePath)))
@@ -49,19 +50,20 @@
     //engine nodes
     const string defaultName = "newNode";
     if (0 == type.compare("SpriteRendererNode"))
-        return new SpriteRendererNode(defaultName,"");
+        return new SpriteRendererNode();
     if (0 == type.compare("DotRendererNode"))
-        return new DotRendererNode(defaultName,sf::Color::Black);
+        return new DotRendererNode();
     if (0 == type.compare("SceneNode"))
-        return new SceneNode(defaultName);
+        return new SceneNode();
     if (0 == type.compare("LinearRotatorNode"))
-        return new LinearRotatorNode(defaultName,0);
+        return new LinearRotatorNode();
     if (0 == type.compare("CameraNode"))
-        return new CameraNode(defaultName,nullptr);
-
+        return new CameraNode();
+    if (0 == type.compare("TilemapNode"))
+        return new TilemapNode();
     //game nodes
     if (0 == type.compare("CameraBehaviourNode"))
-        return new CameraBehaviourNode(defaultName);
+        return new CameraBehaviourNode();
 
     throw sf::Exception("unknown node type fond in xml file : "+type);
 
@@ -87,7 +89,7 @@
         for (xml_attribute<> *attr = xmlNode->first_attribute();
              attr!=nullptr; attr = attr->next_attribute())
         {
-            cout<<attr->name()<<" : "<<attr->value();
+            //cout<<attr->name()<<" : "<<attr->value()<<endl;
             bool success = sceneNode->LoadXmlAttribute(attr->name(),attr->value());
             if (!success) cerr<<"unknown attribute : "<<attr->name()<<endl;
         }

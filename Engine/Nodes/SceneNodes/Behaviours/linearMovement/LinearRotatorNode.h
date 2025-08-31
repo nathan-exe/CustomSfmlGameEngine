@@ -10,7 +10,7 @@
 class LinearRotatorNode : public BehaviourNode
 {
 public:
-    LinearRotatorNode(string Name,float AngularSpeedDegreesPerSecond);
+    LinearRotatorNode(string Name = DEFAULT_NODE_NAME,float AngularSpeedDegreesPerSecond = 360);
     void Update(float deltatime) override;
     void Start() override;
     bool LoadXmlAttribute(string key, string value) override;

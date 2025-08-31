@@ -14,8 +14,10 @@
 class RendererNode : public SceneNode
 {
 public:
-    RendererNode(const std::string& name);
+    RendererNode(const std::string& name = DEFAULT_NODE_NAME);
     ~RendererNode();
+
+    virtual void Initialize();
     virtual void Draw(CameraNode& Camera) = 0;
 
     bool LoadXmlAttribute(string key, string value) override;

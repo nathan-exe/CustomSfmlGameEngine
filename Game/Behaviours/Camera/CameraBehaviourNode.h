@@ -11,16 +11,17 @@
 class CameraBehaviourNode : public BehaviourNode
 {
 public:
-    CameraBehaviourNode(const string& name)
+    CameraBehaviourNode(const string& name = DEFAULT_NODE_NAME,CameraNode* cam = nullptr)
         : BehaviourNode(name)
     {
+        this->cam = cam;
     }
 
     void Update(float deltatime) override;
     void Start() override;
 
 private:
-        CameraNode* cam;
+        CameraNode* cam = nullptr;
 };
 
 

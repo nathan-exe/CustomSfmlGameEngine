@@ -17,7 +17,7 @@ using sf::Vector2,sf::Angle,sf::Vector2f,sf::Transform;
 class SceneNode : public Node
 {
 public:
-    SceneNode(const string& name);
+    SceneNode(const string& name = DEFAULT_NODE_NAME);
 
     //transformations
     [[nodiscard]] Transform GetLocalTransform() const;

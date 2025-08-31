@@ -15,6 +15,10 @@ RendererNode::~RendererNode()
     RendererManager::Instance->UnregisterRenderer(this);
 }
 
+void RendererNode::Initialize()
+{
+}
+
 bool RendererNode::LoadXmlAttribute(string key, string value)
 {
     bool result = SceneNode::LoadXmlAttribute(key, value);

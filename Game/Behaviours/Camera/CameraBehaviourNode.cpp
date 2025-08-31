@@ -26,5 +26,6 @@ void CameraBehaviourNode::Update(float deltatime)
 
 void CameraBehaviourNode::Start()
 {
+    if (cam == nullptr)
     cam = static_cast<CameraNode*>(Parent);
 }

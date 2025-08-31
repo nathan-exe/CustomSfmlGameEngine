@@ -14,7 +14,7 @@ public:
     [[nodiscard]] SceneNode* InstantiateEmptyNode(std::string type);
     [[nodiscard]] SceneNode* LoadNode(xml_node<>* xmlNode);
 
-///relative file path from Ressources/Scenes
+///relative file path from Resources/Scenes
     [[nodiscard]] SceneNode* LoadScene(const path filepath);
 };
 

@@ -12,11 +12,15 @@
                 localTransform="0,0,1,1,0"
                 worldHeight="30">
             <CameraBehaviourNode
-                    name="CameraBehaviourNode"
+                    name="CameraBehaviour"
                     localTransform="0,0,1,1,0"/>
         </CameraNode>
     </SceneNode>
 
     <__SceneInstance path = "Windmill.xml"/>
+    <TilemapNode
+            name = "MainTilemap"
+            localTransform = "0,0,1,1,0"
+            mapPath = "TestTileMap.png"/>
 </SceneNode>
 

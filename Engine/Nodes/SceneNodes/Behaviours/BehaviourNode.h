@@ -10,7 +10,7 @@
 class BehaviourNode : public SceneNode
 {
 public :
-    BehaviourNode(string name) ;
+    BehaviourNode(string name = DEFAULT_NODE_NAME) ;
     ~BehaviourNode();
     virtual void Update(float deltatime) = 0;
     virtual void Start() = 0;

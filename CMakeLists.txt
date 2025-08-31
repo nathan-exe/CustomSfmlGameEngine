@@ -46,5 +46,9 @@ add_executable(
         Engine/Libs/rapidxml/rapidxml_utils.hpp
         Engine/Libs/rapidxml/rapidxml_print.hpp
         Engine/Libs/rapidxml/rapidxml_iterators.hpp
+        Engine/Nodes/SceneNodes/Tilemaps/TilemapNode.cpp
+        Engine/Nodes/SceneNodes/Tilemaps/TilemapNode.h
+        Engine/Nodes/SceneNodes/Tilemaps/TilemapRendererNode.cpp
+        Engine/Nodes/SceneNodes/Tilemaps/TilemapRendererNode.h
 )
 target_link_libraries(testSFML PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)

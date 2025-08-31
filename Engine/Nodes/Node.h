@@ -13,11 +13,12 @@
 #include <sstream>
 
 using std::string, std::cout,std::endl;
+const string DEFAULT_NODE_NAME = "newNode";
 
 class Node
 {
 public :
-    Node(const std::string& name = "newObject");
+    Node(const std::string& name = DEFAULT_NODE_NAME);
     virtual ~Node();
 
     void AddChild(Node* node);

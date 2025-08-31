@@ -5,7 +5,7 @@
     <SpriteRendererNode
             name = "PaperMill"
             localTransform = "-15,0,1,1,0"
-            spriteName = "paperMill_Handle">
+            spriteName = "windmill_handle">
         <LinearRotatorNode
                 name = "LinearRotatorNode"
                 localTransform = "0,3,1,1,0"
@@ -13,17 +13,17 @@
             <SpriteRendererNode
                     name = "wing"
                     localTransform = "0,0,1,1,0"
-                    spriteName="paperMill_Wing"
+                    spriteName="windmill_wing"
             />
             <SpriteRendererNode
                     name = "wing"
                     localTransform = "0,0,1,1,120"
-                    spriteName="paperMill_Wing"
+                    spriteName="windmill_wing"
             />
             <SpriteRendererNode
                     name = "wing"
                     localTransform = "0,0,1,1,240"
-                    spriteName="paperMill_Wing"
+                    spriteName="windmill_wing"
             />
         </LinearRotatorNode>
     </SpriteRendererNode>

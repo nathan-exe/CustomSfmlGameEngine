@@ -13,7 +13,7 @@
 class SpriteRendererNode : public RendererNode
 {
 public :
-    SpriteRendererNode(const std::string& name,const std::string& SpriteName);
+    SpriteRendererNode(const std::string& name = DEFAULT_NODE_NAME,const std::string& SpriteName = "");
     void Draw(CameraNode& Camera) override;
 
     bool LoadXmlAttribute(string key, string value) override;

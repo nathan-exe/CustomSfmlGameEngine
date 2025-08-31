@@ -25,13 +25,10 @@ void Game::LoadScene()
     sceneRoot->PrintTree();
 }
 
-void Game::LoadAllGameSprites()
+void Game::InitGraphics()
 {
     spriteManager.LoadAllTexturesInDirectory("Shared");
-    spriteManager.CreateSprite("test","tileset_enviro.png",sf::IntRect({0,0},{12,12}));
-    spriteManager.CreateSprite("player","tileset_enviro.png",sf::IntRect({0,0},{12,12}));
-    spriteManager.CreateSprite("paperMill_Handle","testScan.png",sf::IntRect({50,50},{100,200}),{50,20});
-    spriteManager.CreateSprite("paperMill_Wing","testScan.png",sf::IntRect({200,150},{50,100}),{25,0});
+    spriteManager.LoadAllSpritesInDirectory("");
 }
 
 void Game::init()
@@ -44,7 +41,7 @@ void Game::init()
         sf::State::Windowed);
     Window.setVerticalSyncEnabled(true);
 
-    LoadAllGameSprites();
+    InitGraphics();
     LoadScene();
 
     //RendererManager::Instance->PrintAllRenderersInOrder();
@@ -55,6 +52,7 @@ void Game::run()
 {
     init();
 
+    rendererManager.InitializeAllRenderers();
     behaviourManager.StartAllBehavioursInOrder();
 
     // run the program as long as the window is open
@@ -99,6 +97,9 @@ void Game::HandleWindowEvents()
 
 void Game::DrawGame()
 {
+    if (!Window.isOpen())
+        Window.display();
+
     Window.clear(sf::Color::White);
 
     try

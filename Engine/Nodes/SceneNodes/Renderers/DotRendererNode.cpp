@@ -4,11 +4,8 @@
 
 #include "DotRendererNode.h"
 
-DotRendererNode::DotRendererNode(const std::string& name, sf::Color color)
- : RendererNode(name)
+DotRendererNode::DotRendererNode(const std::string& name, sf::Color color) : RendererNode(name)
 {
-    color.a = 120;
-    this->color = color;
 }
 
 void DotRendererNode::Draw(CameraNode& Camera)

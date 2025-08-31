@@ -21,7 +21,7 @@ private:
   void DrawGame();
 
   void LoadScene();
-  void LoadAllGameSprites();
+  void InitGraphics();
 
 private :
   sf::RenderWindow Window;
