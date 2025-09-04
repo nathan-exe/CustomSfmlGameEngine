@@ -89,22 +89,40 @@ void SpriteManager::LoadSpriteFromFile(path path)
         //rect
         getline(file, line);
         line = line.substr(7);
-        char* characters = const_cast<char*> (line.c_str());
+
+        std::stringstream ss(line);
+
+        // Temporary object to store
+        // the splitted string
+        string t;
+
+        // Delimiter
         char del = ',';
 
+
+
+
+
         sf::Rect<int> rect;
-        rect.position.x = StringConversions::FloatFromString(strtok(characters,&del));
-        rect.position.y = StringConversions::FloatFromString(strtok(NULL,&del));
-        rect.size.x = StringConversions::FloatFromString(strtok(NULL,&del));
-        rect.size.y = StringConversions::FloatFromString(strtok(NULL,&del));
+        getline(ss, t, del);
+        rect.position.x = StringConversions::IntFromString(t);
+        getline(ss, t, del);
+        rect.position.y = StringConversions::IntFromString(t);
+        getline(ss, t, del);
+        rect.size.x = StringConversions::IntFromString(t);
+        getline(ss, t, del);
+        rect.size.y = StringConversions::IntFromString(t);
+
 
         //origin
         getline(file, line);
         line = line.substr(9);
-        characters = const_cast<char*>(line.c_str());
+        ss = std::stringstream(line);
         sf::Vector2f origin;
-        origin.x = StringConversions::FloatFromString(strtok(characters,&del));
-        origin.y = StringConversions::FloatFromString(strtok(NULL,&del));
+        getline(ss, t, del);
+        origin.x = StringConversions::FloatFromString(t);
+        getline(ss, t, del);
+        origin.y = StringConversions::FloatFromString(t);
 
         //spritename
         string spritename = path.stem().string();

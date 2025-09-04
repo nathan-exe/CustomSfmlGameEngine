@@ -120,14 +120,20 @@ bool SceneNode::LoadXmlAttribute(string key, string value)
     }
     else if ((success = 0 == key.compare("localTransform")))
     {
-        char* characters = const_cast<char*>(value.c_str());
         char del = ',';
+        string temp;
+        std::stringstream stream(value);
 
-        _localPosition.x = StringConversions::FloatFromString(strtok(characters,&del));
-        _localPosition.y = StringConversions::FloatFromString(strtok(NULL,&del));
-        _localScale.x = StringConversions::FloatFromString(strtok(NULL,&del));
-        _localScale.y = StringConversions::FloatFromString(strtok(NULL,&del));
-        _localAngle = StringConversions::AngleFromString(strtok(NULL,&del));
+        std::getline(stream, temp, del);
+        _localPosition.x = StringConversions::FloatFromString(temp);
+        std::getline(stream, temp, del);
+        _localPosition.y = StringConversions::FloatFromString(temp);
+        std::getline(stream, temp, del);
+        _localScale.x = StringConversions::FloatFromString(temp);
+        std::getline(stream, temp, del);
+        _localScale.y = StringConversions::FloatFromString(temp);
+        std::getline(stream, temp, del);
+        _localAngle = StringConversions::AngleFromString(temp);
         cout<<"local position : "<<_localPosition.x<<" "<<_localPosition.y<<endl;
         cout<<"local scale : "<<_localScale.x<<" "<<_localScale.y<<endl;
     }
