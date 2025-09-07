@@ -7,10 +7,12 @@
 #include "TilemapNode.h"
 #include "../Renderers/RendererNode.h"
 
+using sf::Drawable;
 
-class TilemapRendererNode : RendererNode
+class TilemapRendererNode : public RendererNode
 {
 public:
+    ~TilemapRendererNode();
     void Draw(CameraNode& Camera) override;
     void Initialize() override;
 
@@ -18,8 +20,8 @@ private :
     void LoadTileSet();
 
 private:
-    TilemapNode* _tilemap;
-    std::map<int,sf::Drawable> _tileVisuals;
+    TilemapNode* _tilemap = nullptr;
+    std::map<int,Drawable*> _tileVisuals;
 };
 
 

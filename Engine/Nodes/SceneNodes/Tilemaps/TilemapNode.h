@@ -25,6 +25,11 @@ public :
 
     bool LoadXmlAttribute(string key, string value) override;
 
+    const std::map<std::pair<unsigned int,unsigned int>,int>& GetAllTiles() const;
+
+public:
+    float TileSizeCm = 1;
+
 private:
     std::map<std::pair<unsigned int,unsigned int>,int> tiles ;
     std::unordered_set<int> allTileTypes;

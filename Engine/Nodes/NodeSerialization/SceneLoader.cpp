@@ -11,7 +11,7 @@
 #include "../SceneNodes/Behaviours/BehaviourNode.h"
 #include "../SceneNodes/Behaviours/linearMovement/LinearRotatorNode.h"
 #include "../SceneNodes/Renderers/DotRendererNode.h"
-
+#include "../SceneNodes/Tilemaps/TilemapRendererNode.h"
 
 
 [[nodiscard]] SceneNode* SceneLoader::LoadScene(const path filepath)
@@ -61,6 +61,8 @@
         return new CameraNode();
     if (0 == type.compare("TilemapNode"))
         return new TilemapNode();
+    if (0 == type.compare("TilemapRendererNode"))
+        return new TilemapRendererNode();
     //game nodes
     if (0 == type.compare("CameraBehaviourNode"))
         return new CameraBehaviourNode();

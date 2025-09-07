@@ -1,3 +1,5 @@
-﻿#color : TileIndex
+﻿--- Properties :
+TileSize : 2cm
+--- TilemapColorTable :
 0x000000 : null
 0xFFFFFF : TileSets/Main

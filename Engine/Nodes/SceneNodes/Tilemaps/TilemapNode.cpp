@@ -77,6 +77,13 @@ bool TilemapNode::LoadXmlAttribute(string key, string value)
     {
         if ((success = key == "mapPath"))
             LoadMap(value);
+        else if ((success = key == "TileSizeCm"))
+            TileSizeCm = StringConversions::FloatFromString(value);
     }
     return success;
+}
+
+const std::map<std::pair<unsigned int, unsigned int>, int>& TilemapNode::GetAllTiles() const
+{
+    return tiles;
 }

@@ -35,7 +35,7 @@ void Game::init()
 {
     //window creation
     Window = sf::RenderWindow(
-        sf::VideoMode({1920*4/5, 1080*4/5}),
+        sf::VideoMode({1920*3/5, 1080*3/5}),
         "My window",
         sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar,
         sf::State::Windowed);
@@ -43,9 +43,6 @@ void Game::init()
 
     InitGraphics();
     LoadScene();
-
-    //RendererManager::Instance->PrintAllRenderersInOrder();
-
 }
 
 void Game::run()
@@ -66,7 +63,7 @@ void Game::run()
             behaviourManager.UpdateAllBehavioursInOrder(deltaTime);
             DrawGame();
         }
-        catch (sf::Exception e)
+        catch (sf::Exception& e)
         {
             std::cerr<<e.what()<<std::endl;
         }
@@ -106,7 +103,7 @@ void Game::DrawGame()
     {
         RendererManager::Instance->DrawAllRenderersInOrder(*CameraNode::Current);
     }
-    catch (sf::Exception e)
+    catch (sf::Exception& e)
     {
         cerr<<e.what()<<std::endl;
     }

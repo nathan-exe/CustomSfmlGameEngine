@@ -21,6 +21,13 @@
     <TilemapNode
             name = "MainTilemap"
             localTransform = "0,0,1,1,0"
-            mapPath = "TestTileMap.png"/>
+            TileSizeCm = "1"
+            mapPath = "TestTileMap.png">
+        <TilemapRendererNode
+            name = "TilemapRenderer"
+            localTransform="0,0,1,1,0"
+        />
+
+    </TilemapNode>
 </SceneNode>
 
