@@ -12,7 +12,7 @@ TilemapRendererNode::~TilemapRendererNode()
 
 void TilemapRendererNode::Draw(CameraNode& Camera)
 {
-    cout<<"- drawing Tilemap ! - "<<endl;
+    //cout<<"- drawing Tilemap ! - "<<endl;
     for (auto pair : _tilemap->GetAllTiles())
     {
         int x = pair.first.first;
@@ -36,7 +36,7 @@ void TilemapRendererNode::Draw(CameraNode& Camera)
 
         sf::Transform worldToScreen =  Camera.WorldToScreenMatrix();
         sf::Transform localToScreen = worldToScreen * GetWorldTransform() *localToTile* texelToLocal;
-        cout<<"     x : "<<x<<", y : "<<y<<", tileID : "<<tileID<<endl;
+        //cout<<"     x : "<<x<<", y : "<<y<<", tileID : "<<tileID<<endl;
         Camera.renderTarget->draw(*tile,localToScreen);
 
     }

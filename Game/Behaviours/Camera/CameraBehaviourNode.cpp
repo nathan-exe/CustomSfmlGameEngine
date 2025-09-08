@@ -8,6 +8,19 @@
 
 void CameraBehaviourNode::Update(float deltatime)
 {
+
+    //keyboard movement
+    constexpr float moveSpeed = 15;
+    Vector2f movementInput = {
+        (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)? 1.0f : 0.0f) - (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)? 1.0f : 0.0f),
+        (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z)? 1.0f : 0.0f) - (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)? 1.0f : 0.0f),
+    };
+    movementInput *= moveSpeed * deltatime;
+
+    static_cast<SceneNode*>(cam->Parent)->Move(movementInput);
+    cam->Move(-movementInput);
+
+    //mouse movement
     sf::Vector2f mousePosition = static_cast<Vector2f>(
     sf::Mouse::getPosition(
         *static_cast<sf::RenderWindow*>(cam->renderTarget)));
@@ -21,7 +34,6 @@ void CameraBehaviourNode::Update(float deltatime)
 
     //damp toward target position
     cam->SetLocalPosition(Math::Damp(cam->GetLocalPosition(),offset,5,deltatime));
-
 }
 
 void CameraBehaviourNode::Start()
