@@ -17,9 +17,9 @@ void SpriteRendererNode::Draw(CameraNode& Camera)
     float invPixelsPerUnits = 1.0f/Camera.PixelsPerUnit;//suggestion : sauvegarder ça dans la cam direct
     texelToLocal.scale({invPixelsPerUnits,-invPixelsPerUnits});
     sf::Transform worldToScreen =  (Camera.WorldToScreenMatrix());
-    sf::Transform localToScreen = worldToScreen * GetWorldTransform() * texelToLocal;
+    sf::Transform texelToScreen = worldToScreen * GetWorldTransform() * texelToLocal;
 
-    Camera.renderTarget->draw(sprite,localToScreen);
+    Camera.renderTarget->draw(sprite,texelToScreen);
 }
 
 bool SpriteRendererNode::LoadXmlAttribute(string key, string value)

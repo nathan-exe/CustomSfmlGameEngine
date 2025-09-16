@@ -50,5 +50,7 @@ add_executable(
         Engine/Nodes/SceneNodes/Tilemaps/TilemapNode.h
         Engine/Nodes/SceneNodes/Tilemaps/TilemapRendererNode.cpp
         Engine/Nodes/SceneNodes/Tilemaps/TilemapRendererNode.h
+        Engine/Systems/AutoTiles/AutoTile.cpp
+        Engine/Systems/AutoTiles/AutoTile.h
 )
 target_link_libraries(testSFML PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)

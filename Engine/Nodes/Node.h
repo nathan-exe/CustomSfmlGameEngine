@@ -15,6 +15,11 @@
 using std::string, std::cout,std::endl;
 const string DEFAULT_NODE_NAME = "newNode";
 
+//todo :
+//  gerer mieux les parents et enfants pour empecher les boucles.
+//  methode IsChildOf() ?
+//  checks dans setParent() etc
+
 class Node
 {
 public :
@@ -39,6 +44,7 @@ public :
     void PrintTree();
     string GetPath() const;
 
+    constexpr virtual const Node* GetParent() const;
 public :
     Node* Parent;
     std::unordered_set<Node*> Children;

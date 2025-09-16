@@ -21,11 +21,12 @@
     <TilemapNode
             name = "MainTilemap"
             localTransform = "0,0,1,1,0"
-            TileSizeCm = "1"
+            TileSizeCm = "2"
             mapPath = "TestTileMap.png">
         <TilemapRendererNode
             name = "TilemapRenderer"
-            localTransform="0,0,1,1,0"
+            localTransform = "0,0,1,1,0"
+            tilesPath = "Resources/Tilesets/Tileset_main.tiles"
         />
 
     </TilemapNode>

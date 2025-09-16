@@ -12,6 +12,11 @@ SceneNode::SceneNode(const string& name) : Node(name)
 
 }
 
+constexpr const SceneNode* SceneNode::GetParent() const
+{
+    return static_cast<const SceneNode*>(Node::GetParent());
+}
+
 sf::Transform SceneNode::GetLocalTransform() const
 {
     sf::Transform localTransform = sf::Transform::Identity;
@@ -28,7 +33,7 @@ sf::Transform SceneNode::GetWorldTransform() const
     //cout<<"local transform : \n"<<DataSerializer::TransformToString(localTransform)<<endl;
 
     if (Parent == nullptr) return localTransform;
-    return static_cast<SceneNode*>(Parent)->GetWorldTransform()*localTransform ;
+    return GetParent()->GetWorldTransform()*localTransform ;
 }
 
 sf::Transform SceneNode::GetWorldToLocalTransform() const
@@ -79,7 +84,7 @@ Vector2f SceneNode::GetWorldPosition() const
 Angle SceneNode::GetWorldAngle() const
 {
     if (Parent==nullptr) return _localAngle;
-    return static_cast<SceneNode*>(Parent)->GetWorldAngle() + _localAngle;
+    return GetParent()->GetWorldAngle() + _localAngle;
 }
 
 void SceneNode::SetLocalPosition(const Vector2f& newPosition)

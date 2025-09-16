@@ -47,10 +47,13 @@ void Game::init()
 
 void Game::run()
 {
+
     init();
 
     rendererManager.InitializeAllRenderers();
     behaviourManager.StartAllBehavioursInOrder();
+
+    cout<<"==== game initialised successfully ! Entering main loop. ===="<<endl;
 
     // run the program as long as the window is open
     sf::Clock clock = sf::Clock();
@@ -63,7 +66,7 @@ void Game::run()
             behaviourManager.UpdateAllBehavioursInOrder(deltaTime);
             DrawGame();
         }
-        catch (sf::Exception& e)
+        catch (std::exception& e)
         {
             std::cerr<<e.what()<<std::endl;
         }
@@ -103,7 +106,7 @@ void Game::DrawGame()
     {
         RendererManager::Instance->DrawAllRenderersInOrder(*CameraNode::Current);
     }
-    catch (sf::Exception& e)
+    catch (std::exception& e)
     {
         cerr<<e.what()<<std::endl;
     }

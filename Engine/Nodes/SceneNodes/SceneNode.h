@@ -18,6 +18,7 @@ class SceneNode : public Node
 {
 public:
     SceneNode(const string& name = DEFAULT_NODE_NAME);
+    [[nodiscard]] constexpr const SceneNode* GetParent() const final ;//tres louche ??
 
     //transformations
     [[nodiscard]] Transform GetLocalTransform() const;
@@ -42,6 +43,9 @@ public:
 
     void SetWorldPosition(const Vector2f& newPosition);
     void SetWorldAngle(const Angle& angle);
+
+
+
 //xml
     virtual bool LoadXmlAttribute(string key, string value);
 

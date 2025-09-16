@@ -1,5 +1,9 @@
-﻿--- Properties :
-TileSize : 2cm
---- TilemapColorTable :
-0x000000 : null
-0xFFFFFF : TileSets/Main
+﻿- AutoTile -
+colorCode : 0x000000
+null
+- AutoTile -
+colorCode : -1
+texture : Resources/Textures/TileSets/MainTileset1.png
+pixels per tile : 100
+autoTile config : Resources/TileSets/AutoTilesConfigs/AutoTileConfig0.png
+default tile : 1,6

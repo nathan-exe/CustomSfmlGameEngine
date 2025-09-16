@@ -102,6 +102,11 @@ string Node::GetPath() const
     return s;
 }
 
+constexpr const Node* Node::GetParent() const
+{
+    return Parent;
+}
+
 
 Node* Node::GetRoot()
 {

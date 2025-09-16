@@ -87,3 +87,25 @@ const std::map<std::pair<unsigned int, unsigned int>, int>& TilemapNode::GetAllT
 {
     return tiles;
 }
+
+int8_t TilemapNode::GetNeighboursAsBitMask(Vector2u tileID) const
+{
+    uint8_t bitmask = 0;
+    int bit = 0;
+    for (int i = -1; i <= 1; i++)
+    {
+        for (int j = -1; j <= 1; j++)
+        {
+            if (i==j==0) continue;
+
+            Vector2u tilePosition = tileID + Vector2u(j, i);
+            if (tiles.contains({tilePosition.x, tilePosition.y}))
+            {
+                bitmask |= (1 << bit);
+            }
+
+            bit++;
+        }
+    }
+    return bitmask;
+}
