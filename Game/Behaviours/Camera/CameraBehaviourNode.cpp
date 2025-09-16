@@ -34,6 +34,10 @@ void CameraBehaviourNode::Update(float deltatime)
 
     //damp toward target position
     cam->SetLocalPosition(Math::Damp(cam->GetLocalPosition(),offset,5,deltatime));
+
+    //zoom
+    float zoomDelta = (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E)?1:0)-(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)?1:0);
+    this->cam->worldHeight-=zoomDelta*deltatime*10;
 }
 
 void CameraBehaviourNode::Start()
