@@ -13,7 +13,8 @@ AutoTile::AutoTile(const std::string& name,const std::string& TexturePath,const 
     this->PixelsPerTile = pixelsPerTile;
 
     cout<<"-Constructing AutoTile-"<<endl;
-    texture = new sf::Texture(TexturePath);
+    texture = new sf::Texture(TexturePath,false);
+    texture->setSmooth(true);
 
     //sprites
     sf::Image configImage(configImagePath);
@@ -31,14 +32,14 @@ AutoTile::AutoTile(const std::string& name,const std::string& TexturePath,const 
                 int8_t bitmaskYes = 0;
                 int8_t bitmaskNo = 0;
                 short bit = 0;
-                for (int i = -1; i < 2; i++)
+                for (int dy = 1; dy >= -1; dy--)
                 {
-                    for (int j = -1; j < 2; j++)
+                    for (int dx = 1; dx >= -1; dx--)
                     {
-                        if (i==0 && j==0) continue;
+                        if (dx==0 && dy==0) continue;
 
 
-                        sf::Color neighbourColor = configImage.getPixel({x*3+1+j,y*3+1+i});
+                        sf::Color neighbourColor = configImage.getPixel({x*3+1+dx,y*3+1+dy});
                         bitmaskYes |= static_cast<int8_t>(neighbourColor == sf::Color::Green) <<bit;
                         bitmaskNo |= static_cast<int8_t>(neighbourColor == sf::Color::Red) <<bit;
 
@@ -57,7 +58,7 @@ AutoTile::AutoTile(const std::string& name,const std::string& TexturePath,const 
                     (int)(pixelsPerTile*y)};
                 rect.size = { pixelsPerTile,pixelsPerTile };
                 sf::Sprite sprite(*texture,rect);
-                sprite.setColor( sf::Color::Cyan);//temp
+                //sprite.setColor( sf::Color::Cyan);//temp
 
                 //add sprite to map
                 _sprites.insert(
@@ -69,8 +70,8 @@ AutoTile::AutoTile(const std::string& name,const std::string& TexturePath,const 
                 if ( defaultTile == sf::Vector2i(x,y))
                 {
                     cout<<"   default tile found at : "<<x<<","<<y<<endl;
-
                     KeyToDefaultTile = std::make_pair(bitmaskYes,bitmaskNo);
+                    //_sprites.at(KeyToDefaultTile).setColor(sf::Color::Red);
                 }
             }
         }
@@ -92,8 +93,8 @@ const sf::Sprite* AutoTile::GetSprite(const int8_t& neighbours) const
     {
         //todo : commenter
         auto yesNo = pair.first;
-        if ((neighbours&yesNo.first)==yesNo.first
-            && ((!neighbours)&yesNo.second)==yesNo.second)
+        if (((neighbours & yesNo.first) == yesNo.first )
+            && ((~neighbours) & yesNo.second) == yesNo.second)
             return &(_sprites.at(yesNo));
     }
 

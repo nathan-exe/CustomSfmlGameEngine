@@ -124,15 +124,19 @@ void TilemapRendererNode::Draw(CameraNode& Camera)
 {
     sf::Font font("Resources//Fonts//NaruMonoDemoRegular-R92j3.ttf");
     sf::Text text(font); // a font is required to make a text object
-    text.setCharacterSize(10); // in pixels, not points!
-    text.setFillColor(sf::Color::Red);
+    text.setCharacterSize(13); // in pixels, not points!
+    text.setFillColor(sf::Color::Black);
     text.setOrigin({-25,-25});
     //for each tile in the tilemap
+
+
     for (auto pair_Position_TileID : _tilemap->GetAllTiles())
     {
         unsigned x = pair_Position_TileID.first.first;
         unsigned y = pair_Position_TileID.first.second;
         int tileID = pair_Position_TileID.second;
+
+        //todo : culling
 
         //cout<<"clé : "<<tileID<<endl;
 
@@ -146,12 +150,12 @@ void TilemapRendererNode::Draw(CameraNode& Camera)
 
             const sf::Sprite* sprite = _tiles.at(tileID)->GetSprite(neighbours);
 
-            string s = std::bitset< 3 >( neighbours ).to_string() + '\n'
-            +std::bitset< 1 >( neighbours>>3 ).to_string()+'x'+std::bitset< 1 >( neighbours>>5 ).to_string()+ '\n'
-            +std::bitset< 3 >( neighbours >>6).to_string()
-            ;
-            text.setString(s);
+             string s = std::bitset< 3 >( neighbours>> 5).to_string() + '\n'
+                 +std::bitset< 1 >( neighbours>>4 ).to_string()+'x'+std::bitset< 1 >( neighbours>>3 ).to_string()+ '\n'
+                 +std::bitset< 3 >( neighbours).to_string();
+             text.setString(s);
 
+            //text.setString(std::to_string(x)+','+std::to_string(y));
             //temp
             //sf::RectangleShape rectangleShape({static_cast<float>(Camera.PixelsPerUnit),static_cast<float>(Camera.PixelsPerUnit)});
             //rectangleShape.setFillColor(sf::Color::Red);
@@ -162,7 +166,7 @@ void TilemapRendererNode::Draw(CameraNode& Camera)
 
             //draw tile
             Camera.renderTarget->draw(*sprite,texelToScreen);
-            Camera.renderTarget->draw(text,texelToScreen);
+            //Camera.renderTarget->draw(text,texelToScreen);
         }
     }
 }

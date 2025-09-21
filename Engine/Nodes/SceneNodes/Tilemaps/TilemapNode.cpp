@@ -91,21 +91,32 @@ const std::map<std::pair<unsigned int, unsigned int>, int>& TilemapNode::GetAllT
 int8_t TilemapNode::GetNeighboursAsBitMask(Vector2u tileID) const
 {
     uint8_t bitmask = 0;
+    int value = tiles.at({tileID.x, tileID.y});
     int bit = 0;
-    for (int i = -1; i <= 1; i++)
-    {
-        for (int j = -1; j <= 1; j++)
-        {
-            if (i==j==0) continue;
 
-            Vector2u tilePosition = tileID + Vector2u(j, i);
-            if (tiles.contains({tilePosition.x, tilePosition.y}))
-            {
-                bitmask |= (1 << bit);
-            }
+    if (tiles.contains({tileID.x+1, tileID.y-1}))
+    bitmask |= (static_cast<int>(tiles.at({tileID.x+1, tileID.y-1})== value) << 0) ;
 
-            bit++;
-        }
-    }
+    if (tiles.contains({tileID.x, tileID.y-1}))
+    bitmask |= (static_cast<int>(tiles.at({tileID.x, tileID.y-1})== value) << 1) ;
+
+    if (tiles.contains({tileID.x-1, tileID.y-1}))
+    bitmask |= (static_cast<int>(tiles.at({tileID.x-1, tileID.y-1})== value) << 2);
+
+    if (tiles.contains({tileID.x+1, tileID.y}))
+    bitmask |= (static_cast<int>(tiles.at({tileID.x+1, tileID.y})== value) << 3);
+
+    if (tiles.contains({tileID.x-1, tileID.y}))
+    bitmask |= (static_cast<int>(tiles.at({tileID.x-1, tileID.y})== value) << 4);
+
+    if (tiles.contains({tileID.x+1, tileID.y+1}))
+    bitmask |= (static_cast<int>(tiles.at({tileID.x+1, tileID.y+1})== value) << 5);
+
+    if (tiles.contains({tileID.x, tileID.y+1}))
+    bitmask |= (static_cast<int>(tiles.at({tileID.x, tileID.y+1})== value) << 6);
+
+    if (tiles.contains({tileID.x-1, tileID.y+1}))
+    bitmask |= (static_cast<int>(tiles.at({tileID.x-1, tileID.y+1})== value) << 7);
+
     return bitmask;
 }

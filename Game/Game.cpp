@@ -3,6 +3,8 @@
 //
 #include "Game.h"
 
+#include <bitset>
+
 #include "../Engine/Nodes/NodeSerialization/SceneLoader.h"
 #include "../Engine/Nodes/SceneNodes/Behaviours/linearMovement/LinearRotatorNode.h"
 #include "../Engine/Nodes/SceneNodes/Renderers/DotRendererNode.h"

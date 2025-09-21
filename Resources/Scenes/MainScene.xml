@@ -9,8 +9,8 @@
             localTransform="0,10,1,1,0">
         <CameraNode
                 name="Camera"
-                localTransform="0,0,1,1,0"
-                worldHeight="30">
+                localTransform="5,0,1,1,0"
+                worldHeight="10">
             <CameraBehaviourNode
                     name="CameraBehaviour"
                     localTransform="0,0,1,1,0"/>
