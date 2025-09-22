@@ -21,7 +21,7 @@
     <TilemapNode
             name = "MainTilemap"
             localTransform = "0,0,1,1,0"
-            TileSizeCm = "2"
+            TileSizeCm = "1"
             mapPath = "TestTileMap.png">
         <TilemapRendererNode
             name = "TilemapRenderer"

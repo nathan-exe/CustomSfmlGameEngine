@@ -25,10 +25,6 @@ AutoTile::AutoTile(const std::string& name,const std::string& TexturePath,const 
             sf::Color color = configImage.getPixel({x*3+1,y*3+1});
             if (color == sf::Color::White)
             {
-                cout<<"pose : "<<x<<','<<y<<endl;
-
-                //BUG : bitmasks pas bons, y'en a plein à 0.
-
                 int8_t bitmaskYes = 0;
                 int8_t bitmaskNo = 0;
                 short bit = 0;
@@ -58,7 +54,6 @@ AutoTile::AutoTile(const std::string& name,const std::string& TexturePath,const 
                     (int)(pixelsPerTile*y)};
                 rect.size = { pixelsPerTile,pixelsPerTile };
                 sf::Sprite sprite(*texture,rect);
-                //sprite.setColor( sf::Color::Cyan);//temp
 
                 //add sprite to map
                 _sprites.insert(
@@ -71,7 +66,6 @@ AutoTile::AutoTile(const std::string& name,const std::string& TexturePath,const 
                 {
                     cout<<"   default tile found at : "<<x<<","<<y<<endl;
                     KeyToDefaultTile = std::make_pair(bitmaskYes,bitmaskNo);
-                    //_sprites.at(KeyToDefaultTile).setColor(sf::Color::Red);
                 }
             }
         }

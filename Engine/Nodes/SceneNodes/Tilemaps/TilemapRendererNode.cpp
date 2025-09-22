@@ -138,15 +138,10 @@ void TilemapRendererNode::Draw(CameraNode& Camera)
 
         //todo : culling
 
-        //cout<<"clé : "<<tileID<<endl;
-
         if (_tiles.contains(tileID))
         {
-            //cout<<"la clé existe !!!!"<<endl;
-
             //find wich tile to draw depending on neighbours (auto tile)
             int8_t neighbours = _tilemap->GetNeighboursAsBitMask({x,y});
-            //cout<<"neighbours : "<<std::bitset<8>(neighbours)<<endl;
 
             const sf::Sprite* sprite = _tiles.at(tileID)->GetSprite(neighbours);
 

@@ -52,5 +52,13 @@ add_executable(
         Engine/Nodes/SceneNodes/Tilemaps/TilemapRendererNode.h
         Engine/Systems/AutoTiles/AutoTile.cpp
         Engine/Systems/AutoTiles/AutoTile.h
+        Engine/Systems/Physics/Physics.cpp
+        Engine/Systems/Physics/Physics.h
+        Engine/Systems/Physics/Shapes/Circle.h
+        Engine/Systems/Physics/Shapes/OBB.h
+        Engine/Systems/Physics/Shapes/AABB.h
+        Engine/Systems/Physics/HitResult.h
+        Engine/Systems/Physics/Shapes/Collider.cpp
+        Engine/Systems/Physics/Shapes/Collider.h
 )
 target_link_libraries(testSFML PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)
